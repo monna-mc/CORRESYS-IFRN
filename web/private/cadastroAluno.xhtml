@@ -8,13 +8,13 @@
         <title>Cadastro_Aluno</title>
     </h:head>
     <h:body onload="document.getElementById('form1:matricula').focus()">
-        
+
         <center for="nome" style="color:cornflowerblue">
             <h1>
                 CORRESYS
             </h1>
         </center>
-        
+
         <h:form>
             <p:menubar>
 
@@ -70,33 +70,34 @@
                 <br/>
                 <p:panel header="CADASTRO DE ALUNO">
 
-                </p:panel>
-                <center>
-     
-                    Matrícula *<br/><p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="14" mask="9999.9999.9999.99"></p:inputMask><h:message for="matrícula" style="color:red"/>
-                    <br/>
-                    Nome *<br/><p:inputText title="Nome" value="#{alunoMB.aluno.nome}" required="true" requiredMessage="campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
-                    <br/>
-                    E-mail <br/> <p:inputText title="E-mail" value="#{alunoMB.aluno.email}"  maxlength="150">
-                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>
-                    <br/>
-                    Senha *<br/><p:password title="Senha" value="#{alunoMB.aluno.senha}"></p:password><h:message for="nome" style="color:red"/>
-                    <br/>
-                    Curso *<br/><p:inputText title="Curso" value="#{alunoMB.aluno.curso}" required="true" requiredMessage="campos curso não foi preenchido" maxlength="150"></p:inputText><h:message for="curso" style="color:red"/>
-                    <br/>
-                    Turma *<br/><p:inputText title="Turma" value="#{alunoMB.aluno.turma}" required="true" requiredMessage="campos turma não foi preenchido" maxlength="150"></p:inputText><h:message for="turma" style="color:red"/>
-                    <br/>
-                    <br/>
-                    <h:commandButton value="Inserir" action="#{alunoMB.inserir()}" /><h:message for="nome" style="color:red"/>
-                    <h:commandButton value="Cancelar" action="administrador.xhtml"/>
-                    <br/>
-                    <br/>
-                </center>
+                    <center>
 
+                        Matrícula *<br/><p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="14" mask="9999.9999.9999.99"></p:inputMask><h:message for="matrícula" style="color:red"/>
+                        <br/>
+                        Nome *<br/><p:inputText title="Nome" value="#{alunoMB.aluno.nome}" required="true" requiredMessage="campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                        <br/>
+                        E-mail <br/> <p:inputText title="E-mail" value="#{alunoMB.aluno.email}"  maxlength="150">
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>
+                        <br/>
+                        Senha *<br/><p:password title="Senha" value="#{alunoMB.aluno.senha}"></p:password><h:message for="nome" style="color:red"/>
+                        <br/>
+                        Curso *<br/><p:inputText title="Curso" value="#{alunoMB.aluno.curso}" required="true" requiredMessage="campos curso não foi preenchido" maxlength="150"></p:inputText><h:message for="curso" style="color:red"/>
+                        <br/>
+                        Turma *<br/><p:inputText title="Turma" value="#{alunoMB.aluno.turma}" required="true" requiredMessage="campos turma não foi preenchido" maxlength="150"></p:inputText><h:message for="turma" style="color:red"/>
+                        <br/>
+                        <br/>
+                        <h:commandButton value="Inserir" action="#{alunoMB.inserir()}" /><h:message for="nome" style="color:red"/>
+                        <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+                        <br/>
+                        <br/>
+                    </center>
+                    
+                </p:panel>
+                
             </h:form>
-            
+
         </p:layoutUnit>
-        
+
     </h:body>
 </html>
 

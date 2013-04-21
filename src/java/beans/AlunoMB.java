@@ -27,7 +27,7 @@ public class AlunoMB {
     private String mensagem = "";
     private List<Aluno> alunos = new ArrayList<Aluno>();
     private Aluno aluno = new Aluno();
-    
+    private String alunoPesquisado;
     
     public AlunoMB() {
         
@@ -100,5 +100,28 @@ public class AlunoMB {
         if (aluno == null) {
             aluno = new Aluno();
         }
+    }
+    
+    public void alunoPesquisado() {
+        alunos = new ArrayList<Aluno>();
+        for (Aluno u : dao.findAlunoEntities()) {
+            if ((u.getMatricula().toLowerCase().contains(alunoPesquisado) || (u.getNome().toLowerCase().contains(alunoPesquisado)))){
+               // u.setCategoriaUsuario(categoria);
+                alunos.add(u);
+            }
+        }
+        setAlunoPesquisado("");
+    }
+    
+    public List<Aluno> pesquisarListaAluno() {
+        return dao.findAlunoEntities();
+    }
+    
+    public String getAlunoPesquisado() {
+        return alunoPesquisado;
+    }
+
+    public void setAlunoPesquisado(String alunoPesquisado) {
+        this.alunoPesquisado = alunoPesquisado;
     }
 }

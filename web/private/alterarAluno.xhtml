@@ -56,13 +56,12 @@
         <br/>
         
         <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
-            <h:form>
+            <h:form id="formulario">
 
                 <h:inputHidden  value="#{alunoMB.aluno.id}"/> 
                 <br/>
                 <p:panel header="ALTERAR ALUNO">
 
-                </p:panel>
                 <center>
      
                     Matrícula <br/><p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" mask="9999.9999.9999.99"></p:inputMask><h:message for="nome" style="color:red"/>
@@ -80,10 +79,12 @@
                     <br/>
                     <h:commandButton title="Pesquisar" value="Pesquisar" action="#{alunoMB.inserir()}" /><h:message for="nome" style="color:red"/>
                     <h:commandButton title="Atualizar" value="Atualizar" action="#{alunoMB.alterar()}" /><h:message for="nome" style="color:red"/>
-                    <h:commandButton title="Cancelar" value="Cancelar" action="administrador.xhtml" />
+                    <h:commandButton title="Cancelar" value="Cancelar" action="administrador.xhtml" /> 
+                    <p:commandButton value="Pesquisar" action="#{alunoMB.alunoPesquisado()}" update=":formulario, :Aluno"/>
                     <br/>
                     <br/>
                 </center>
+                </p:panel>
             </h:form>
 
         </p:layoutUnit>
@@ -177,6 +178,7 @@
 
         </p:dataTable>
             </p:fieldset>
+                
     </h:body>
 </html>
 
