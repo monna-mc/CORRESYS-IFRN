@@ -44,7 +44,7 @@ public class AlunoMB {
     //metodo de inserção no banco de dados
     public void inserir() {
         dao.create(aluno);
-        this.setMensagem(this.aluno.getNome() + " cadastrado(a) com sucesso!");
+        this.setMensagem(this.aluno.getNome() + " cadastrado(a) com sucesso! ");
         aluno = new Aluno();
     }
     
