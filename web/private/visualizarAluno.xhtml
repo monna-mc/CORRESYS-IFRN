@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Visualizar_Aluno</title>
+    </h:head>
+    <h:body>
+
+        <center for="nome" style="color:cornflowerblue"> 
+            <h1> 
+                CORRESYS
+            </h1>   
+        </center>
+        <h:form>  
+            <p:menubar>   
+
+                <p:submenu label="Redação">  
+                    <p:menuitem value="Inserir" url="#" />
+                    <p:menuitem value="Alterar" url="#" />  
+                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Visualizar" url="#" />
+                </p:submenu>  
+
+                <p:submenu label="Administrador"> 
+                    <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" /> 
+                    <p:menuitem value="Alterar" url="#" />  
+                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Visualizar" url="#" />
+                </p:submenu> 
+
+                <p:submenu label="Aluno">  
+                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
+                    <p:menuitem value="Visualizar" url="visualizarAluno.xhtml" />
+                </p:submenu>  
+
+                <p:submenu label="Corretor"> 
+                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />  
+                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+                    <p:menuitem value="Visualizar" url="visualizarCorretor.xhtml" />
+                </p:submenu>
+
+                <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
+
+            </p:menubar>  
+
+        </h:form>  
+        <br/>
+        <br/>
+        
+        <p:fieldset legend="LISTA DE ALUNOS" style="color: cornflowerblue"> 
+
+        <br/>
+        <br/>
+
+            <p:dataTable id="Aluno" value="#{alunoMB.aluList}" var="con" rendered="#{alunoMB.pesquisar() > 0}">
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Matrícula" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form >
+                        <h:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText  value="${con.matricula}"/>
+                        </h:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nome" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText value="${con.nome}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText  value="E-mail" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText  value="${con.email}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Curso" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText value="${con.curso}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Turma" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText value="${con.turma}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column  >
+                    <f:facet name="header">
+                        <h:outputText value="Ação" style="color: cornflowerblue"/>
+                    </f:facet>             
+                    
+                </p:column>
+
+            </p:dataTable>
+        
+        </p:fieldset>
+        
+    </h:body>
+</html>
+
+
+
+
+

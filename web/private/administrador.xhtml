@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    
+    <f:view contentType="text/html">
+        <h:head>
+            
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Usuario_Administrador</title>
+            </f:facet>
+            
+        </h:head>
+
+        <h:body>
+
+            <h:form>  
+
+                <p:growl id="messages"/>  
+
+                <center for="nome" style="color:cornflowerblue"> 
+                    <h1> 
+                        CORRESYS
+                    </h1>   
+                </center>
+                <p:menubar>   
+                    
+                    <p:submenu label="Redação">  
+                        <p:menuitem value="Inserir" url="#" />
+                        <p:menuitem value="Alterar" url="#" />  
+                        <p:menuitem value="Remover" url="#" />
+                        <p:menuitem value="Visualizar" url="#" />
+                    </p:submenu>  
+
+                    <p:submenu label="Administrador"> 
+                        <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" /> 
+                        <p:menuitem value="Alterar" url="#" />  
+                        <p:menuitem value="Remover" url="#" />
+                        <p:menuitem value="Visualizar" url="#" />
+                    </p:submenu> 
+
+                    <p:submenu label="Aluno">  
+                        <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                        <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                        <p:menuitem value="Remover" url="removerAluno.xhtml" />
+                        <p:menuitem value="Visualizar" url="visualizarAluno.xhtml" />
+                    </p:submenu>  
+
+                    <p:submenu label="Corretor"> 
+                        <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                        <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
+                        <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+                        <p:menuitem value="Visualizar" url="visualizarCorretor.xhtml" />
+                    </p:submenu>
+
+                    <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
+                    
+                </p:menubar>  
+
+           </h:form> 
+
+        </h:body>
+
+    </f:view>
+</html>
+

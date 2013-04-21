@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Cadastro_Corretor</title>
+    </h:head>
+    <h:body>
+        <center for="nome" style="color:cornflowerblue"> 
+            <h1> 
+                CORRESYS
+            </h1>   
+        </center>
+        <h:form>  
+            <p:menubar>   
+
+               <p:submenu label="Redação">  
+                    <p:menuitem value="Inserir" url="#" />
+                    <p:menuitem value="Alterar" url="#" />  
+                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Visualizar" url="#" />
+                </p:submenu>  
+
+                <p:submenu label="Administrador"> 
+                    <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" /> 
+                    <p:menuitem value="Alterar" url="#" />  
+                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Visualizar" url="#" />
+                </p:submenu> 
+
+                <p:submenu label="Aluno">  
+                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
+                    <p:menuitem value="Visualizar" url="visualizarAluno.xhtml" />
+                </p:submenu>  
+
+                <p:submenu label="Corretor"> 
+                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />  
+                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+                    <p:menuitem value="Visualizar" url="visualizarCorretor.xhtml" />
+                </p:submenu>
+
+                <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
+
+                
+            </p:menubar>  
+
+        </h:form>  
+
+        <br/>
+        
+        <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
+            <h:form>
+
+                <h:inputHidden  value="#{corretorMB.corretor.id}"/> 
+                <br/>
+                <p:panel header="CADASTRO DE CORRETOR" >
+
+                </p:panel>
+                <center>
+                    Matrícula *<br/><p:inputMask title="Matrícula" value="#{corretorMB.corretor.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="14" mask="9999.9999.9999.99"></p:inputMask><h:message for="matrícula" style="color:red"/>
+                    <br/>
+                    Nome *<br/><p:inputText title="Nome" value="#{corretorMB.corretor.nome}" required="true" requiredMessage="campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    E-mail <br/><p:inputText title="E-mail" value="#{corretorMB.corretor.email}" maxlength="150"> 
+                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
+                    <br/>
+                    Senha *<br/><p:password title="Senha" value="#{corretorMB.corretor.senha}"></p:password><h:message for="nome" style="color:red"/>
+                    <br/>
+                    <br/>
+                    <h:commandButton value="Inserir" action="#{corretorMB.inserir()}" /><h:message for="nome" style="color:red"/>
+                    <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+                    <br/>
+                    <br/>
+                </center>
+            </h:form>
+        </p:layoutUnit>
+        <br/>  
+    </h:body>
+</html>
+

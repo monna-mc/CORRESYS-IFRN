@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Cadastro_Aluno</title>
+    </h:head>
+    <h:body onload="document.getElementById('form1:matricula').focus()">
+        <center for="nome" style="color:cornflowerblue">
+            <h1>
+                CORRESYS
+            </h1>
+        </center>
+        <h:form>
+            <p:menubar>
+
+                <p:submenu label="Redação">
+                    <p:menuitem value="Inserir" url="#" />
+                    <p:menuitem value="Alterar" url="#" />
+                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Visualizar" url="#" />
+                </p:submenu>
+
+                <p:submenu label="Administrador">
+                    <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" />
+                    <p:menuitem value="Alterar" url="#" />
+                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Visualizar" url="#" />
+                </p:submenu>
+
+                <p:submenu label="Aluno">
+                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" />
+                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />
+                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
+                    <p:menuitem value="Visualizar" url="visualizarAluno.xhtml" />
+                </p:submenu>
+
+                <p:submenu label="Corretor">
+                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" />
+                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
+                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+                    <p:menuitem value="Visualizar" url="visualizarCorretor.xhtml" />
+                </p:submenu>
+
+                <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeAluno.xhtml" icon="ui-icon-close" />
+
+                <f:facet name="options">
+                    <p:inputText style="margin-right:70px"/>
+                    <p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
+                </f:facet>
+            </p:menubar>
+
+        </h:form>
+
+        <br/>
+
+        <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
+
+            <center>
+                <br/>
+                <h:outputText style="color:red" value="#{alunoMB.mensagem}"/>
+            </center>
+            <h:form id="form1">
+
+                <h:inputHidden  value="#{alunoMB.aluno.id}"/>
+                <br/>
+                <p:panel header="CADASTRO DE ALUNO">
+
+                </p:panel>
+                <center>
+     
+                    Matrícula *<br/><p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="14" mask="9999.9999.9999.99"></p:inputMask><h:message for="matrícula" style="color:red"/>
+                    <br/>
+                    Nome *<br/><p:inputText title="Nome" value="#{alunoMB.aluno.nome}" required="true" requiredMessage="campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    E-mail <br/> <p:inputText title="E-mail" value="#{alunoMB.aluno.email}"  maxlength="150">
+                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>
+                    <br/>
+                    Senha *<br/><p:password title="Senha" value="#{alunoMB.aluno.senha}"></p:password><h:message for="nome" style="color:red"/>
+                    <br/>
+                    Curso *<br/><p:inputText title="Curso" value="#{alunoMB.aluno.curso}" required="true" requiredMessage="campos curso não foi preenchido" maxlength="150"></p:inputText><h:message for="curso" style="color:red"/>
+                    <br/>
+                    Turma *<br/><p:inputText title="Turma" value="#{alunoMB.aluno.turma}" required="true" requiredMessage="campos turma não foi preenchido" maxlength="150"></p:inputText><h:message for="turma" style="color:red"/>
+                    <br/>
+                    <br/>
+                    <h:commandButton value="Inserir" action="#{alunoMB.inserir()}" /><h:message for="nome" style="color:red"/>
+                    <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+                    <br/>
+                    <br/>
+                </center>
+
+            </h:form>
+            
+        </p:layoutUnit>
+        
+    </h:body>
+</html>
+

@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Remover_Aluno</title>
+    </h:head>
+    <h:body>
+        <center for="nome" style="color:cornflowerblue"> 
+            <h1> 
+                CORRESYS
+            </h1>   
+        </center>
+        <h:form>  
+            <p:menubar>   
+
+                <p:submenu label="Redação">  
+                    <p:menuitem value="Inserir" url="#" />
+                    <p:menuitem value="Alterar" url="#" />  
+                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Visualizar" url="#" />
+                </p:submenu>  
+
+                <p:submenu label="Administrador"> 
+                    <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" /> 
+                    <p:menuitem value="Alterar" url="#" />  
+                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Visualizar" url="#" />
+                </p:submenu> 
+
+                <p:submenu label="Aluno">  
+                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
+                    <p:menuitem value="Visualizar" url="visualizarAluno.xhtml" />
+                </p:submenu>  
+
+                <p:submenu label="Corretor"> 
+                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />  
+                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+                    <p:menuitem value="Visualizar" url="visualizarCorretor.xhtml" />
+                </p:submenu>
+
+                <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
+
+
+            </p:menubar>  
+
+        </h:form>  
+        
+        <br/>
+        
+        <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
+            <h:form>
+
+                <h:inputHidden  value="#{alunoMB.aluno.id}"/> 
+                <br/>
+                <p:panel header="REMOVER ALUNO">
+
+                </p:panel>
+                <center>
+                    Matrícula <br/><p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" mask="9999.9999.9999.99"></p:inputMask><h:message for="nome" style="color:red"/>
+                    <br/>
+                    Nome <br/><p:inputText title="Nome" value="#{alunoMB.aluno.nome}"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    E-mail <br/> <p:inputText title="E-mail" value="#{alunoMB.aluno.email}"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    Senha <br/><p:password title="Senha" value="#{alunoMB.aluno.senha}"></p:password><h:message for="nome" style="color:red"/>
+                    <br/>
+                    Curso <br/><p:inputText title="Curso" value="#{alunoMB.aluno.curso}"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    Turma <br/><p:inputText title="Turma" value="#{alunoMB.aluno.turma}"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    <br/>
+                    <h:commandButton title="Pesquisar" value="Pesquisar" action="#{alunoMB.inserir()}" /><h:message for="nome" style="color:red"/>
+                    <h:commandButton title="Remover" value="Remover" action="#{alunoMB.excluir()}" /><h:message for="nome" style="color:red"/>
+                    <h:commandButton title="Cancelar" value="Cancelar" action="administrador.xhtml" />
+                    <br/>
+                    <br/>
+                </center>
+            </h:form>
+
+        </p:layoutUnit>
+
+        <br/>
+
+        <p:fieldset legend="LISTA DE ALUNOS" style="color: cornflowerblue">
+
+        <br/>
+
+            <p:dataTable id="Aluno" value="#{alunoMB.aluList}" var="con" rendered="#{alunoMB.pesquisar() > 0}">
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Matrícula" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form >
+                        <h:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText  value="${con.matricula}"/>
+                        </h:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nome" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText value="${con.nome}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText  value="E-mail" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText  value="${con.email}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Senha" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText value="${con.senha}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Curso" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText value="${con.curso}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Turma" style="color: cornflowerblue"/>                   
+                    </f:facet>
+                    <h:form>
+                        <p:commandLink action="#{alunoMB.carregar(con.id)}">
+                            <h:outputText value="${con.turma}"/>
+                        </p:commandLink>                        
+                    </h:form>
+                </p:column>
+
+                <p:column  >
+                    <f:facet name="header">
+                        <h:outputText value="Ação" style="color: cornflowerblue"/>
+                    </f:facet>             
+                    <h:form >
+
+                        <h:commandButton value=" Carregar ">   
+                            <f:setPropertyActionListener value="#{con}" target="#{alunoMB.aluno}"/>
+                        </h:commandButton> 
+
+                    </h:form>
+                    
+                </p:column>
+
+            </p:dataTable>
+
+        </p:fieldset>
+        
+    </h:body>
+</html>
+
+
+
