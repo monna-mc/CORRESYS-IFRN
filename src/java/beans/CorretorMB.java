@@ -44,7 +44,7 @@ public class CorretorMB {
     //metodo de inserção no banco de dados
     public void inserir() {
         dao.create(corretor);
-        this.setMensagem(this.corretor.getNome() + " foi inserido");
+        this.setMensagem(this.corretor.getNome() + " cadastrado(a) com sucesso!");
         corretor = new Corretor();
     }
     

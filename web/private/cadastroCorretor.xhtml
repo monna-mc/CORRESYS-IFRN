@@ -56,6 +56,11 @@
         <br/>
 
         <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
+            <center>
+                <br/>
+                <h:outputText style="color:red" value="#{corretorMB.mensagem}"/>
+            </center>
+            
             <h:form>
 
                 <h:inputHidden  value="#{corretorMB.corretor.id}"/> 
@@ -66,12 +71,12 @@
                         
                         Matrícula *<br/><p:inputMask title="Matrícula" value="#{corretorMB.corretor.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="14" mask="9999.9999.9999.99"></p:inputMask><h:message for="matrícula" style="color:red"/>
                         <br/>
-                        Nome *<br/><p:inputText title="Nome" value="#{corretorMB.corretor.nome}" required="true" requiredMessage="campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                        Nome *<br/><p:inputText title="Nome" value="#{corretorMB.corretor.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
                         <br/>
                         E-mail <br/><p:inputText title="E-mail" value="#{corretorMB.corretor.email}" maxlength="150"> 
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
                         <br/>
-                        Senha *<br/><p:password title="Senha" value="#{corretorMB.corretor.senha}"></p:password><h:message for="nome" style="color:red"/>
+                        Senha *<br/><p:password title="Senha" value="#{corretorMB.corretor.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
                         <br/>
                         <br/>
                         <h:commandButton value="Inserir" action="#{corretorMB.inserir()}" /><h:message for="nome" style="color:red"/>
@@ -80,7 +85,7 @@
                         <br/>
                         
                     </center>
-                    
+                    <h:messages style="color:red"/>
                 </p:panel>
                 
             </h:form>
