@@ -23,30 +23,30 @@
                     <p:menuitem value="Alterar" url="#" />  
                     <p:menuitem value="Remover" url="#" />
                     <p:menuitem value="Visualizar" url="#" />
-                </p:submenu>  
+               </p:submenu>  
 
-                <p:submenu label="Administrador"> 
-                    <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" /> 
-                    <p:menuitem value="Alterar" url="#" />  
-                    <p:menuitem value="Remover" url="#" />
-                    <p:menuitem value="Visualizar" url="#" />
-                </p:submenu> 
+                    <p:submenu label="Administrador"> 
+                        <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" /> 
+                        <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
+                        <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
+                        
+                    </p:submenu> 
 
-                <p:submenu label="Aluno">  
-                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
-                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
-                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
-                    <p:menuitem value="Visualizar" url="visualizarAluno.xhtml" />
-                </p:submenu>  
+                    <p:submenu label="Aluno">  
+                        <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                        <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                        <p:menuitem value="Remover" url="removerAluno.xhtml" />
+                        
+                    </p:submenu>  
 
-                <p:submenu label="Corretor"> 
-                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
-                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />  
-                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
-                    <p:menuitem value="Visualizar" url="visualizarCorretor.xhtml" />
-                </p:submenu>
+                    <p:submenu label="Corretor"> 
+                        <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                        <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
+                        <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+                        
+                    </p:submenu>
 
-                <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
+                <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorresys.xhtml" icon="ui-icon-close" />  
 
 
             </p:menubar>  
@@ -56,29 +56,33 @@
         <br/>
 
         <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
-            <h:form>
+             <center>
+                <br/>
+                <h:outputText style="color:red" value="#{corretorMB.mensagemExclusao}"/>
+            </center>
+            <h:form id="formulario">
 
                 <h:inputHidden  value="#{corretorMB.corretor.id}"/> 
                 <br/>
                 <p:panel header="REMOVER CORRETOR">
 
-                    <center>
-                        Matrícula <br/><p:inputText title="Matrícula" value="#{corretorMB.corretor.matricula}"></p:inputText><h:message for="nome" style="color:red"/>
+                     <center>
+                        
+                        Matrícula *<br/><p:inputMask title="Matrícula" value="#{corretorMB.corretor.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
                         <br/>
-                        Nome  <br/><p:inputText title="Nome" value="#{corretorMB.corretor.nome}"></p:inputText><h:message for="nome" style="color:red"/>
+                        Nome *<br/><p:inputText title="Nome" value="#{corretorMB.corretor.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
                         <br/>
-                        E-mail <br/><p:inputText title="E-mail" value="#{corretorMB.corretor.email}"></p:inputText><h:message for="nome" style="color:red"/>                   
+                        E-mail <br/><p:inputText title="E-mail" value="#{corretorMB.corretor.email}" maxlength="150"> 
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
                         <br/>
-                        Senha <br/><p:inputText title="Senha" value="#{corretorMB.corretor.senha}"></p:inputText><h:message for="nome" style="color:red"/>
+                        Senha *<br/><p:password title="Senha" value="#{corretorMB.corretor.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
                         <br/>
                         <br/>
-                        <h:commandButton title="Pesquisar" value="Pesquisar" action="#{corretorMB.alterar()}" /><h:message for="nome" style="color:red"/>
                         <h:commandButton title="Remover" value="Remover" action="#{corretorMB.excluir()}" /><h:message for="nome" style="color:red"/>
                         <h:commandButton title="Cancelar" value="Cancelar" action="administrador.xhtml"/>
-                        <br/>
-                        <br/>
+                        <br/>   
                     </center>
-
+                    <h:messages style="color:red"/>
                 </p:panel>
             </h:form>
 
@@ -86,73 +90,71 @@
 
         <br/>
 
-        <p:fieldset legend="LISTA DE CORRETORES" style="color: cornflowerblue">
-
             <br/>
 
-            <p:dataTable id="Corretor" value="#{corretorMB.corrList}" var="con" rendered="#{corretorMB.pesquisar() > 0}">
+            <h:form id="formularioPesquisa">
+            <p:panel id="formPanelPesquisa" header="PESQUISAR CORRETORES" >
+                <h:panelGrid columns="2">
+                    <h:outputLabel value=""/>
+                    <p:inputText id="nomeDoCorretor" style="text-transform: lowercase" maxlength="30" value ="#{corretorMB.corretorPesquisado}" required="true"/><p:message for="nomeDoCorretor"/>
+                </h:panelGrid>
+                <p:commandButton value="Pesquisar" action="#{corretorMB.pesquisarCorretores()}" update=":formularioPesquisa, :tabela, :formulario"/>
+            </p:panel>
+        </h:form>
 
-                <p:column >
-                    <f:facet name="header">
-                        <h:outputText value="Matrícula" style="color: cornflowerblue"/>                   
+        <br/>
+        
+         <p:fieldset legend="LISTA DE CORRETORES" style="color: cornflowerblue">
+            <h:form id="tabela">
+
+                <p:dataTable rendered="true" id="dataTable" var="c" value="#{corretorMB.corrList}" paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+                    <f:facet name="header">  
+
                     </f:facet>
-                    <h:form >
-                        <h:commandLink action="#{corretorMB.carregar(con.id)}">
-                            <h:outputText title="Matrícula do Corretor" value="${con.matricula}"/>
-                        </h:commandLink>                        
-                    </h:form>
-                </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Nome" style="color: cornflowerblue"/>                   
-                    </f:facet>
-                    <h:form>
-                        <p:commandLink action="#{corretorMB.carregar(con.id)}">
-                            <h:outputText title="Nome do Corretor" value="${con.nome}"/>
-                        </p:commandLink>                        
-                    </h:form>
-                </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Matrícula" />
+                        </f:facet>
+                        <p:commandLink value="#{c.matricula}" update=":formulario">
+                            <f:setPropertyActionListener value="#{a}" target="#{corretorMB.corretor}"/>  
+                        </p:commandLink>
+                    </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText  value="E-mail" style="color:cornflowerblue"/>                   
-                    </f:facet>
-                    <h:form>
-                        <p:commandLink action="#{corretorMB.carregar(con.id)}">
-                            <h:outputText title="E-mail do Corretor" value="${con.email}"/>
-                        </p:commandLink>                        
-                    </h:form>
-                </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome" />
+                        </f:facet>
+                        <p:commandLink value="#{c.nome}" update=":formulario">
+                            <f:setPropertyActionListener value="#{c}" target="#{corretorMB.corretor}"/>  
+                        </p:commandLink>
+                    </p:column>
 
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Senha" style="color: cornflowerblue"/>                   
-                    </f:facet>
-                    <h:form>
-                        <p:commandLink action="#{corretorMB.carregar(con.id)}">
-                            <h:outputText title="Senha do Corretor" value="${con.senha}"/>
-                        </p:commandLink>                        
-                    </h:form>
-                </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="E-mail" />
+                        </f:facet>
+                        <p:commandLink value="#{c.email}" update=":formulario">
+                            <f:setPropertyActionListener value="#{c}" target="#{corretorMB.corretor}"/>  
+                        </p:commandLink>
+                    </p:column>
 
-                <p:column  >
-                    <f:facet name="header">
-                        <h:outputText value="Ação" style="color: cornflowerblue"/>
-                    </f:facet>             
-                    <h:form >
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Senha" />
+                        </f:facet>
+                        <p:commandLink value="#{c.senha}" update=":formulario">
+                            <f:setPropertyActionListener value="#{c}" target="#{corretorMB.corretor}"/>  
+                        </p:commandLink>
+                    </p:column>
 
-                        <h:commandButton title="Carregar corretor no formulário" value=" Carregar ">   
-                            <f:setPropertyActionListener value="#{con}" target="#{corretorMB.corretor}"/>
-                        </h:commandButton> 
+                </p:dataTable>
 
-                    </h:form>
-                </p:column>
-
-            </p:dataTable>
+            </h:form>
 
         </p:fieldset>
-
+        
     </h:body>
 </html>
 

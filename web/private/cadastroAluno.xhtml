@@ -23,29 +23,29 @@
                     <p:menuitem value="Alterar" url="#" />
                     <p:menuitem value="Remover" url="#" />
                     <p:menuitem value="Visualizar" url="#" />
-                </p:submenu>
+                </p:submenu>  
 
-                <p:submenu label="Administrador">
-                    <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" />
-                    <p:menuitem value="Alterar" url="#" />
-                    <p:menuitem value="Remover" url="#" />
-                    <p:menuitem value="Visualizar" url="#" />
-                </p:submenu>
+                    <p:submenu label="Administrador"> 
+                        <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" /> 
+                        <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
+                        <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
+                        
+                    </p:submenu> 
 
-                <p:submenu label="Aluno">
-                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" />
-                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />
-                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
-                    <p:menuitem value="Visualizar" url="visualizarAluno.xhtml" />
-                </p:submenu>
+                    <p:submenu label="Aluno">  
+                        <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                        <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                        <p:menuitem value="Remover" url="removerAluno.xhtml" />
+                        
+                    </p:submenu>  
 
-                <p:submenu label="Corretor">
-                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" />
-                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
-                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
-                    <p:menuitem value="Visualizar" url="visualizarCorretor.xhtml" />
-                </p:submenu>
-
+                    <p:submenu label="Corretor"> 
+                        <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                        <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
+                        <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+                        
+                    </p:submenu>
+                
                 <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeAluno.xhtml" icon="ui-icon-close" />
 
                 <f:facet name="options">
@@ -72,7 +72,7 @@
 
                     <center>
 
-                        Matrícula *<br/><p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="14" mask="9999.9999.9999.99"></p:inputMask><h:message for="matrícula"  style="color:red"/>
+                        Matrícula *<br/><p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
                         <br/>
                         Nome *<br/><p:inputText title="Nome" value="#{alunoMB.aluno.nome}" required="true" requiredMessage="Campo nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
                         <br/>
@@ -88,7 +88,6 @@
                         <br/>
                         <h:commandButton value="Inserir" action="#{alunoMB.inserir()}" /><h:message for="nome" style="color:red"/>
                         <h:commandButton value="Cancelar" action="administrador.xhtml"/>
-                        <br/>
                         <br/>
                     </center>
                     <h:messages style="color:red"/>

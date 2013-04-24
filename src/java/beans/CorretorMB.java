@@ -1,4 +1,3 @@
-
 package beans;
 
 import dao.CorretorJpaController;
@@ -14,9 +13,8 @@ import javax.persistence.Persistence;
 import modelo.Corretor;
 
 /**
- * @author Monnalisa Christina
- * ManagedBean do Corretor - projeto Corresys versão 1.0
- * data:25/03/2013
+ * @author Monnalisa Christina ManagedBean do Corretor - projeto Corresys versão
+ * 1.0 data:25/03/2013
  */
 @ManagedBean
 @RequestScoped
@@ -27,12 +25,12 @@ public class CorretorMB {
     private String mensagem = "";
     private List<Corretor> corretores = new ArrayList<Corretor>();
     private Corretor corretor = new Corretor();
-    
-    
+    private String corretorPesquisado;
+
     public CorretorMB() {
-        
+        pesquisar();
     }
-    
+
     public String getMensagem() {
         return mensagem;
     }
@@ -40,21 +38,43 @@ public class CorretorMB {
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
+
+    public String getMensagemExclusao() {
+        return mensagem;
+    }
+
+    public void setMensagemExclusao(String mensagem) {
+        this.mensagem = mensagem;
+    }
+    
+    public String getMensagemAlteracao() {
+        return mensagem;
+    }
+
+    public void setMensagemAlteracao(String mensagem) {
+        this.mensagem = mensagem;
+    }
     
     //metodo de inserção no banco de dados
     public void inserir() {
-        dao.create(corretor);
-        this.setMensagem(this.corretor.getNome() + " cadastrado(a) com sucesso!");
-        corretor = new Corretor();
+        try {
+            dao.create(corretor);
+            this.setMensagem(this.corretor.getNome() + " cadastrado(a) com sucesso!");
+            corretor = new Corretor();
+        }catch(Exception ex){
+            setMensagem(this.corretor.getNome()+"já existe no sistema, cadastro não realizado!");
+            Logger.getLogger(CorretorMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        pesquisar();
     }
-    
+
     public void alterar() throws Exception {
         try {
             dao.edit(corretor);
-            setMensagem(this.corretor.getNome() + " foi alterado");
+            setMensagemAlteracao(this.corretor.getNome() + " alterado com sucesso!");
             corretor = new Corretor();
         } catch (NonexistentEntityException ex) {
-            this.setMensagem("id não existe");
+            this.setMensagemAlteracao("id não existe");
             Logger.getLogger(CorretorMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -62,20 +82,14 @@ public class CorretorMB {
     public void excluir() {
         try {
             dao.destroy(corretor.getId());
-            setMensagem(this.corretor.getNome() + " foi excluido");
+            setMensagemExclusao(this.corretor.getNome() + " excluído com sucesso!");
             corretor = new Corretor();
         } catch (NonexistentEntityException ex) {
-            this.setMensagem("id não existe");
+            this.setMensagemExclusao("id não existe");
             Logger.getLogger(CorretorMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public int pesquisar() {
-        corretores = dao.findCorretorEntities();
-        return corretores.size();
-    }
-
-    
     public void carregar(Long id) {
         Corretor c = dao.findCorretor(id);
         corretor.setMatricula(c.getMatricula());
@@ -88,7 +102,7 @@ public class CorretorMB {
             corretor = new Corretor();
         }
     }
-    
+
     public Corretor getCorretor() {
         return corretor;
     }
@@ -99,5 +113,33 @@ public class CorretorMB {
 
     public List<Corretor> getCorrList() {
         return corretores;
+    }
+    
+    public int pesquisar() {
+        corretores = dao.findCorretorEntities();
+        return corretores.size();
+    }
+    
+     public void pesquisarCorretores() {
+        corretores = new ArrayList<Corretor>();
+        for (Corretor c : dao.findCorretorEntities()) {
+            if ((c.getMatricula().toLowerCase().contains(corretorPesquisado) || (c.getNome().toLowerCase().contains(corretorPesquisado)))){
+                corretores.add(c);
+                
+            }
+        }
+        setCorretorPesquisado("");
+    }
+     
+     public List<Corretor> pesquisarCorretor() {
+        return dao.findCorretorEntities();
+    }
+    
+    public String getCorretorPesquisado() {
+        return corretorPesquisado;
+    }
+
+    public void setCorretorPesquisado(String corretorPesquisado) {
+        this.corretorPesquisado = corretorPesquisado;
     }
 }

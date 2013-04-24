@@ -5,15 +5,15 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    
+
     <f:view contentType="text/html">
         <h:head>
-            
+
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Usuario_Administrador</title>
             </f:facet>
-            
+
         </h:head>
 
         <h:body>
@@ -27,14 +27,14 @@
                         CORRESYS
                     </h1>   
                 </center>
-                
+
                 <p:menubar>   
-                    
+
                     <p:submenu label="Redação">  
                         <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
                         <p:menuitem value="Alterar" url="#" />  
                         <p:menuitem value="Remover" url="#" />
-                       
+                        <p:menuitem value="Visualizar" url="#" />
                     </p:submenu>  
 
                     <p:submenu label="Administrador"> 
@@ -59,10 +59,65 @@
                     </p:submenu>
 
                     <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
-                    
+
                 </p:menubar>  
 
-           </h:form> 
+            </h:form> 
+
+            <br/>
+            
+            <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
+
+            <center>
+                <br/>
+                <h:outputText style="color:red" value="#{alunoMB.mensagem}"/>
+            </center>
+            <h:form id="form1">
+
+                <h:inputHidden  value="#{alunoMB.aluno.id}"/>
+                <br/>
+                <p:panel header="CADASTRO DE REDAÇÃO">
+
+                    
+
+                        Tema : * <p:inputText  size="100" value="#{redacaoMB.redacao.tema}" required="true" requiredMessage="Tema obrigatória" maxlength="250" ></p:inputText><h:message for="tema"  style="color:red"/>
+                        <br/>
+                        <br/>
+                        Título : * <p:inputText size="100" value="#{redacaoMB.redacao.titulo}" required="true" requiredMessage="Campo título não foi preenchido" maxlength="250"></p:inputText><h:message for="nome" style="color:red"/>
+                        <br/>
+                        <br/>
+                        Nota *
+                        <br/>
+                        Status *
+                        <br/>
+                        Matrícula Aluno *
+                        <br/>
+                        Matrícula Corretor *
+                        <br/>
+                        <br/>
+                        <h:commandButton value ="Inserir"></h:commandButton>
+                        <br/>
+                    
+                    <h:messages style="color:red"/>
+                </p:panel>
+                
+            </h:form>
+
+        </p:layoutUnit>
+            
+            <h:form enctype="multipart/form-data">  
+
+                
+                <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"  
+                              mode="advanced"  
+                              update="messages"  
+                              auto="true"  
+                              sizeLimit="1000000000"   
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
+
+                <p:growl id="messages" showDetail="true"/>  
+
+            </h:form>  
 
         </h:body>
 

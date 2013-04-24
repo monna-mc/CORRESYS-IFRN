@@ -1,10 +1,12 @@
-
+//git
 package beans;
 
 import dao.AlunoJpaController;
 import dao.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -30,7 +32,7 @@ public class AlunoMB {
     private String alunoPesquisado;
     
     public AlunoMB() {
-        
+        pesquisar();
     }
     
     public String getMensagem() {
@@ -41,11 +43,34 @@ public class AlunoMB {
         this.mensagem = mensagem;
     }
     
+    public String getMensagemExclusao() {
+        return mensagem;
+    }
+
+    public void setMensagemExclusao(String mensagem) {
+        this.mensagem = mensagem;
+    }
+    
+    public String getMensagemAlteracao() {
+        return mensagem;
+    }
+
+    public void setMensagemAlteracao(String mensagem) {
+        this.mensagem = mensagem;
+    }
+    
     //metodo de inserção no banco de dados
     public void inserir() {
-        dao.create(aluno);
-        this.setMensagem(this.aluno.getNome() + " cadastrado(a) com sucesso! ");
-        aluno = new Aluno();
+        try{
+            dao.create(aluno);
+            this.setMensagem(this.aluno.getNome() + " cadastrado(a) com sucesso! ");
+            aluno = new Aluno();
+        }catch(Exception ex){
+            setMensagem(this.aluno.getNome()+"já existe no sistema, cadastro não realizado!");
+            Logger.getLogger(AlunoMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        pesquisar();
     }
     
       public  Aluno getAluno() {
@@ -63,27 +88,22 @@ public class AlunoMB {
     public void excluir() {
         try {
             dao.destroy(aluno.getId());
-            setMensagem(this.aluno.getNome() + " foi excluido");
+            setMensagemExclusao(this.aluno.getNome() + " excluído com sucesso!");
             aluno= new Aluno();
         } catch (NonexistentEntityException ex) {
-            this.setMensagem("id não existe");
+            this.setMensagemExclusao("id não existe");
             Logger.getLogger(AlunoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public int pesquisar() {
-        alunos = dao.findAlunoEntities();
-        return alunos.size();
     }
 
      public void alterar() throws Exception {
         try {
             dao.edit(aluno);
-            setMensagem(this.aluno.getNome() + " foi alterado");
+            setMensagemAlteracao(this.aluno.getNome() + "alterado com sucesso!");
             aluno = new Aluno();
         } catch (NonexistentEntityException ex) {
-            this.setMensagem("id não existe");
-            Logger.getLogger(CorretorMB.class.getName()).log(Level.SEVERE, null, ex);
+            this.setMensagemAlteracao("id não existe");
+            Logger.getLogger(AlunoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -102,18 +122,26 @@ public class AlunoMB {
         }
     }
     
-    public void alunoPesquisado() {
+    public int pesquisar() {
+        alunos = dao.findAlunoEntities();
+        return alunos.size();
+    }
+    
+    
+    public void pesquisarAlunos() {
         alunos = new ArrayList<Aluno>();
-        for (Aluno u : dao.findAlunoEntities()) {
-            if ((u.getMatricula().toLowerCase().contains(alunoPesquisado) || (u.getNome().toLowerCase().contains(alunoPesquisado)))){
-               // u.setCategoriaUsuario(categoria);
-                alunos.add(u);
+        for (Aluno a : dao.findAlunoEntities()) {
+            if ((a.getMatricula().toLowerCase().contains(alunoPesquisado) || (a.getNome().toLowerCase().contains(alunoPesquisado)))){
+                alunos.add(a);
+                
             }
         }
         setAlunoPesquisado("");
     }
     
-    public List<Aluno> pesquisarListaAluno() {
+    
+    
+    public List<Aluno> pesquisarAluno() {
         return dao.findAlunoEntities();
     }
     

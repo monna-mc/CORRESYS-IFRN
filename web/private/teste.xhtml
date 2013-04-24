@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"      
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Manutenção de Usuario</title>
+    </h:head>
+    <h:body onload="document.getElementById('formulario:nome').focus()">
+
+       
+                
+                <h:form></h:form>
+                
+                <h:form id="tabela">
+                    <p:dataTable rendered="true" id="dataTable" var="a" value="#{alunoMB.aluList}" paginator="true" rows="5"  
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                                 rowsPerPageTemplate="5,10,15,20,25">
+                        <f:facet name="header">  
+                            <h:outputText value="Alunos Cadastrados" /> 
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Matrícula" />
+                            </f:facet>
+                            <p:commandLink value="#{a.matricula}" update=":formulario">
+                                <f:setPropertyActionListener value="#{a}" target="#{alunoMB.aluno}"/>  
+                            </p:commandLink>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nome" />
+                            </f:facet>
+                            <p:commandLink value="#{a.nome}" update=":formulario">
+                                <f:setPropertyActionListener value="#{a}" target="#{alunoMB.aluno}"/>  
+                            </p:commandLink>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Senha" />
+                            </f:facet>
+                            <p:commandLink value="#{a.senha}" update=":formulario">
+                                <f:setPropertyActionListener value="#{a}" target="#{alunoMB.aluno}"/>  
+                            </p:commandLink>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="E-mail" />
+                            </f:facet>
+                            <p:commandLink value="#{a.email}" update=":formulario">
+                                <f:setPropertyActionListener value="#{a}" target="#{alunoMB.aluno}"/>  
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                <hr></hr>
+                
+                <h:form id="formulario"> 
+                    <p:panel id="panel" header="Cadastro de Aluno">    
+                        
+                        <h:panelGrid columns="3">
+
+                            <h:outputLabel for="nome" value="Nome: *" />  
+                            <p:inputText id="nome"  
+                                         value="#{alunoMB.aluno.nome}"  requiredMessage="Campo Obrigatório" required="true" label="Nome"/>  
+                            <p:message for="nome" />
+
+                            <h:outputLabel for="matricula" value="Matrícula: *" />  
+                            <p:inputMask mask="9999999999" id="matricula" value="#{alunoMB.aluno.matricula}" maxlength="10" required="true" requiredMessage="Campo Obrigatório" label="Matricula"/>  
+                            <p:message for="matricula" /> 
+
+                            <h:outputLabel for="senha" value="Senha: " />  
+                            <p:inputMask id="senha" mask="(99)9999-9999" value="#{alunoMB.aluno.senha}" label="Senha"/>  
+                            <p:message for="senha"/>
+
+                            <h:outputLabel for="email" value="E-mail: *" />  
+                            <p:inputText id="email" value="#{alunoMB.aluno.email}" maxlength="40" validatorMessage="nome@example.com" requiredMessage="Campo Obrigatório" required="true" label="Email">     
+                                <f:validateRegex for="email" pattern="^([0-9a-zA-Z]+([_.-]?[0-9a-zA-Z]+)*@[0-9a-zA-Z]+[0-9,a-z,A-Z,.,-]*(.){1}[a-zA-Z]{2,4})+$"/>
+                            </p:inputText>
+                            <p:message for="email" /> 
+                        </h:panelGrid>
+                        <p:commandButton  id="inserir" value="Inserir" update="formulario, :tabela" action="#{alunoMB.inserir()}"/>
+                        <p:commandButton value="Alterar" update="formulario, :tabela" action="#{alunoMB.alterar()}"/>
+                        <p:commandButton value="Excluir" update="formulario, :tabela" action="#{alunoMB.excluir()}"/>    
+                    </p:panel><br/>
+                    <b><h:outputText value="#{alunoMB.mensagem}"/></b>
+                </h:form>
+                <br/>
+
+                 <!--Formulario de pesquisa--> 
+                
+                <h:form id="formPesquisa">
+                    <p:panel id="formPanelPesquisa" header="Pesquisar Aluno">
+                        <h:panelGrid columns="3">
+                            <h:outputLabel value=""/>
+                            <p:inputText id="nomeDoAluno" style="text-transform: lowercase" maxlength="30" value ="#{alunoMB.alunoPesquisado}" required="true" requiredMessage="Campo Obrigatório"/><p:message for="nomeDoAluno"/>
+                        </h:panelGrid>
+                        <p:commandButton value="Pesquisar" action="#{alunoMB.pesquisarPorAluno()}" update=":formPesquisa, :tabela, :formulario"/>
+                    </p:panel>
+                </h:form>
+                <hr></hr>
+                
+                <h:form id="formPesquisaTodos">
+                    <p:panel id="formPanelPesquisa" header="Pesquisar Todos os Usuários">
+                        <p:commandButton value="Pesquisar Todos" action="#{alunoMB.pesquisar()}" update=":formPesquisa, :tabela, :formulario"/>
+                    </p:panel>
+                </h:form>
+        
+                
+           
+
+    </h:body>
+</html>
+
