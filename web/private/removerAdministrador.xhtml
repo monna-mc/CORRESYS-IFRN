@@ -64,21 +64,27 @@
                 <br/>
                 <p:panel header="REMOVER ADMINISTRADOR">
 
-                    <center>
-                        Matrícula <br/><p:inputText title="Matrícula" value="#{administradorMB.administrador.matricula}"></p:inputText><h:message for="nome" style="color:red"/>
-                        <br/>
-                        Nome  <br/><p:inputText title="Nome" value="#{administradorMB.administrador.nome}"></p:inputText><h:message for="nome" style="color:red"/>
-                        <br/>
-                        E-mail <br/><p:inputText title="E-mail" value="#{administradorMB.administrador.email}"></p:inputText><h:message for="nome" style="color:red"/>                   
-                        <br/>
-                        Senha <br/><p:inputText title="Senha" value="#{administradorMB.administrador.senha}"></p:inputText><h:message for="nome" style="color:red"/>
+                   <br/>
+                        Matrícula : * <p:inputMask title="Matrícula" value="#{administradorMB.administrador.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
                         <br/>
                         <br/>
-                        <h:commandButton title="Remover" value="Remover" action="#{administradorMB.excluir()}" /><h:message for="nome" style="color:red"/>
-                        <h:commandButton title="Cancelar" value="Cancelar" action="administrador.xhtml"/>
+                        Nome : * <p:spacer height="24"/><p:inputText  size = "80" title="Nome" value="#{administradorMB.administrador.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                        <br/>
+                        E-mail : <p:spacer height="34"/> <p:inputText size ="80" title="E-mail" value="#{administradorMB.administrador.email}" maxlength="150"> 
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
                         <br/>
                         <br/>
-                    </center>
+                        Senha : * <p:spacer height="22"/><p:inputText title="Senha" value="#{administradorMB.administrador.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:inputText><h:message for="nome" style="color:red"/>
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <h:commandButton value="Remover" action="#{administradorMB.excluir()}" /><h:message for="nome" style="color:red"/>
+                        <p:spacer height="22"/>
+                        <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+                       
+                        <br/>
+                    
+                    <h:messages style="color:red"/>
 
                 </p:panel>
             </h:form>

@@ -20,30 +20,30 @@
 
                 <p:submenu label="Redação">  
                     <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
-                        <p:menuitem value="Alterar" url="#" />  
-                        <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Alterar" url="#" />  
+                    <p:menuitem value="Remover" url="#" />
                 </p:submenu>  
 
-                    <p:submenu label="Administrador"> 
-                      <p:menuitem value="Cadastrar" url="cadastrarAdministrador.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
-                        <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
-                        
-                    </p:submenu> 
+                <p:submenu label="Administrador"> 
+                    <p:menuitem value="Cadastrar" url="cadastrarAdministrador.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
 
-                    <p:submenu label="Aluno">  
-                        <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
-                        <p:menuitem value="Remover" url="removerAluno.xhtml" />
-                        
-                    </p:submenu>  
+                </p:submenu> 
 
-                    <p:submenu label="Corretor"> 
-                        <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
-                        <p:menuitem value="Remover" url="removerCorretor.xhtml" />
-                        
-                    </p:submenu>
+                <p:submenu label="Aluno">  
+                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
+
+                </p:submenu>  
+
+                <p:submenu label="Corretor"> 
+                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
+                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+
+                </p:submenu>
 
                 <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorresys.xhtml" icon="ui-icon-close" />  
 
@@ -65,27 +65,34 @@
                 <br/>
                 <p:panel header="ALTERAR ALUNO">
 
-                    <center>
-
-                        Matrícula *<br/><p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
-                        <br/>
-                        Nome *<br/><p:inputText title="Nome" value="#{alunoMB.aluno.nome}" required="true" requiredMessage="Campo nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
-                        <br/>
-                        E-mail <br/> <p:inputText title="E-mail" value="#{alunoMB.aluno.email}"  maxlength="150">
+                    <br/>
+                    Matrícula : * <p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
+                    <br/>
+                    <br/>
+                    Nome : *  <p:spacer height="24"/> <p:inputText  size="80" title="Nome" value="#{alunoMB.aluno.nome}" required="true" requiredMessage="Campo nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    E-mail : <p:spacer height="34"/> <p:inputText size="80" title="E-mail" value="#{alunoMB.aluno.email}"  maxlength="150">
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>
-                        <br/>
-                        Senha *<br/><p:password title="Senha" value="#{alunoMB.aluno.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
-                        <br/>
-                        Curso *<br/><p:inputText title="Curso" value="#{alunoMB.aluno.curso}" required="true" requiredMessage="Campo curso não foi preenchido" maxlength="150"></p:inputText><h:message for="curso" style="color:red"/>
-                        <br/>
-                        Turma *<br/><p:inputText title="Turma" value="#{alunoMB.aluno.turma}" required="true" requiredMessage="Campo turma não foi preenchido" maxlength="150"></p:inputText><h:message for="turma" style="color:red"/>
-                        <br/>
-                        <br/>
-                        <h:commandButton title="Atualizar" value="Atualizar" action="#{alunoMB.alterar()}" /><h:message for="nome" style="color:red"/>
-                        <h:commandButton title="Cancelar" value="Cancelar" action="administrador.xhtml" /> 
-                        <br/>
-                        <br/>
-                    </center>
+                    <br/>
+                    <br/>
+                    Senha : * <p:spacer height="20"/> <p:inputText title="Senha" value="#{alunoMB.aluno.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    <br/>
+                    Curso : * <p:spacer height="22"/> <p:inputText size="80" title="Curso" value="#{alunoMB.aluno.curso}" required="true" requiredMessage="Campo curso não foi preenchido" maxlength="150"></p:inputText><h:message for="curso" style="color:red"/>
+                    <br/>
+                    <br/>
+                    Turma : * <p:spacer height="20"/> <p:inputText size="80" title="Turma" value="#{alunoMB.aluno.turma}" required="true" requiredMessage="Campo turma não foi preenchido" maxlength="150"></p:inputText><h:message for="turma" style="color:red"/>
+                    <br/>
+                    <br/>
+                    <hr/>
+
+                    <h:commandButton title="Atualizar" value="Atualizar" action="#{alunoMB.alterar()}" /><h:message for="nome" style="color:red"/>
+                    <p:spacer height="22"/>
+                    <h:commandButton title="Cancelar" value="Cancelar" action="administrador.xhtml" /> 
+                    <br/>
+
+                    <h:messages style="color:red"/>
+
 
                 </p:panel>
             </h:form>
@@ -93,17 +100,17 @@
         </p:layoutUnit>
 
         <br/>
-        
-         <h:form id="formularioPesquisa">
-                    <p:panel id="formPanelPesquisa" header="PESQUISAR ALUNOS" >
-                        <h:panelGrid columns="2">
-                            <h:outputLabel value=""/>
-                           <p:inputText id="nomeDoAluno" style="text-transform: lowercase" maxlength="30" value ="#{alunoMB.alunoPesquisado}" required="true"/><p:message for="nomeDoAluno"/>
-                        </h:panelGrid>
-                        <p:commandButton value="Pesquisar" action="#{alunoMB.pesquisarAlunos()}" update=":formularioPesquisa, :tabela, :formulario"/>
-                    </p:panel>
-         </h:form>
-        
+
+        <h:form id="formularioPesquisa">
+            <p:panel id="formPanelPesquisa" header="PESQUISAR ALUNOS" >
+                <h:panelGrid columns="2">
+                    <h:outputLabel value=""/>
+                    <p:inputText id="nomeDoAluno" style="text-transform: lowercase" maxlength="30" value ="#{alunoMB.alunoPesquisado}" required="true"/><p:message for="nomeDoAluno"/>
+                </h:panelGrid>
+                <p:commandButton value="Pesquisar" action="#{alunoMB.pesquisarAlunos()}" update=":formularioPesquisa, :tabela, :formulario"/>
+            </p:panel>
+        </h:form>
+
         <br/>
         <p:fieldset legend="LISTA DE ALUNOS" style="color: cornflowerblue">
             <h:form id="tabela">
@@ -173,7 +180,7 @@
                             <h:outputText value="${a.turma}"/>
                         </p:commandLink>
                     </p:column>
-                    
+
                 </p:dataTable>
 
             </h:form>

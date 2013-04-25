@@ -88,7 +88,7 @@ public class AlunoMB {
     public void excluir() {
         try {
             dao.destroy(aluno.getId());
-            setMensagemExclusao(this.aluno.getNome() + " excluído com sucesso!");
+            setMensagemExclusao(this.aluno.getNome() + "  foi excluído(a) com sucesso!");
             aluno= new Aluno();
         } catch (NonexistentEntityException ex) {
             this.setMensagemExclusao("id não existe");
@@ -99,7 +99,7 @@ public class AlunoMB {
      public void alterar() throws Exception {
         try {
             dao.edit(aluno);
-            setMensagemAlteracao(this.aluno.getNome() + "alterado com sucesso!");
+            setMensagemAlteracao(this.aluno.getNome() + " foi alterado(a) com sucesso!");
             aluno = new Aluno();
         } catch (NonexistentEntityException ex) {
             this.setMensagemAlteracao("id não existe");

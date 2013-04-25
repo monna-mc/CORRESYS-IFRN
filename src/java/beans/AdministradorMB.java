@@ -76,7 +76,7 @@ public class AdministradorMB {
     public void alterar() throws Exception {
         try {
             dao.edit(administrador);
-            setMensagemAlterar(this.administrador.getNome() + " informações alteradas com sucesso!");
+            setMensagemAlterar(this.administrador.getNome() + " foi alterado(a) com sucesso!");
             administrador = new Administrador();
         } catch (NonexistentEntityException ex) {
             this.setMensagemAlterar("id não existe");
@@ -87,7 +87,7 @@ public class AdministradorMB {
     public void excluir() {
         try {
             dao.destroy(administrador.getId());
-            setMensagemExclusao(this.administrador.getNome() + " foi excluído com sucesso!");
+            setMensagemExclusao(this.administrador.getNome() + " foi excluído(a) com sucesso!");
             administrador = new Administrador();
         } catch (NonexistentEntityException ex) {
             this.setMensagemExclusao("id não existe");

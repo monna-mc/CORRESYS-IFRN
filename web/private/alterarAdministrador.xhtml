@@ -64,21 +64,28 @@
                 <br/>
                 <p:panel header="ALTERAR ADMINISTRADOR">
 
-                    <center>
-                        Matrícula *<br/><p:inputMask title="Matrícula" value="#{administradorMB.administrador.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
+                    
                         <br/>
-                        Nome *<br/><p:inputText title="Nome" value="#{administradorMB.administrador.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                        Matrícula : * <p:inputMask title="Matrícula" value="#{administradorMB.administrador.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
                         <br/>
-                        E-mail <br/><p:inputText title="E-mail" value="#{administradorMB.administrador.email}" maxlength="150"> 
+                        <br/>
+                        Nome : * <p:spacer height="24"/><p:inputText  size = "80" title="Nome" value="#{administradorMB.administrador.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                        <br/>
+                        E-mail : <p:spacer height="34"/> <p:inputText size ="80" title="E-mail" value="#{administradorMB.administrador.email}" maxlength="150"> 
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
                         <br/>
-                        Senha *<br/><p:password title="Senha" value="#{administradorMB.administrador.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
+                        <br/>
+                        Senha : * <p:spacer height="22"/><p:inputText title="Senha" value="#{administradorMB.administrador.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:inputText><h:message for="nome" style="color:red"/>
                         <br/>
                         <br/>
+                        <hr/>
                         <h:commandButton value="Atualizar" action="#{administradorMB.alterar()}" /><h:message for="nome" style="color:red"/>
+                        <p:spacer height="22"/>
                         <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+                       
                         <br/>
-                    </center>
+                    
+                    <h:messages style="color:red"/>
                     
                 </p:panel>
                 

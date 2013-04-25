@@ -71,7 +71,7 @@ public class CorretorMB {
     public void alterar() throws Exception {
         try {
             dao.edit(corretor);
-            setMensagemAlteracao(this.corretor.getNome() + " alterado com sucesso!");
+            setMensagemAlteracao(this.corretor.getNome() + " foi alterado(a) com sucesso!");
             corretor = new Corretor();
         } catch (NonexistentEntityException ex) {
             this.setMensagemAlteracao("id não existe");
@@ -82,7 +82,7 @@ public class CorretorMB {
     public void excluir() {
         try {
             dao.destroy(corretor.getId());
-            setMensagemExclusao(this.corretor.getNome() + " excluído com sucesso!");
+            setMensagemExclusao(this.corretor.getNome() + "  foi excluído(a) com sucesso!");
             corretor = new Corretor();
         } catch (NonexistentEntityException ex) {
             this.setMensagemExclusao("id não existe");

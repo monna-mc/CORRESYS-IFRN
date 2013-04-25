@@ -76,9 +76,8 @@
                 <h:inputHidden  value="#{alunoMB.aluno.id}"/>
                 <br/>
                 <p:panel header="CADASTRO DE REDAÇÃO">
-
                     
-
+                        <br/>
                         Tema : * <p:inputText  size="100" value="#{redacaoMB.redacao.tema}" required="true" requiredMessage="Tema obrigatória" maxlength="250" ></p:inputText><h:message for="tema"  style="color:red"/>
                         <br/>
                         <br/>
@@ -112,10 +111,14 @@
                               update="messages"  
                               auto="true"  
                               sizeLimit="1000000000"   
-                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
-
+                              allowTypes="/(\.|\/)(pdf)$/"/>  
+                              
+                
+                
                 <p:growl id="messages" showDetail="true"/>  
-
+                   <br/>
+                   <br/>
+                   <br/>
             </h:form>  
 
         </h:body>
