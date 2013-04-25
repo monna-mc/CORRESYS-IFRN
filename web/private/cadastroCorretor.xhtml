@@ -19,32 +19,31 @@
             <p:menubar>   
 
                 <p:submenu label="Redação">  
-                    <p:menuitem value="Inserir" url="#" />
+                    <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
                     <p:menuitem value="Alterar" url="#" />  
                     <p:menuitem value="Remover" url="#" />
-                    <p:menuitem value="Visualizar" url="#" />
-               </p:submenu>  
+                </p:submenu>  
 
-                    <p:submenu label="Administrador"> 
-                        <p:menuitem value="Cadastrar" url="cadastroAdministrador.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
-                        <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
-                        
-                    </p:submenu> 
+                <p:submenu label="Administrador"> 
+                    <p:menuitem value="Cadastrar" url="cadastrarAdministrador.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
 
-                    <p:submenu label="Aluno">  
-                        <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
-                        <p:menuitem value="Remover" url="removerAluno.xhtml" />
-                        
-                    </p:submenu>  
+                </p:submenu> 
 
-                    <p:submenu label="Corretor"> 
-                        <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
-                        <p:menuitem value="Remover" url="removerCorretor.xhtml" />
-                        
-                    </p:submenu>
+                <p:submenu label="Aluno">  
+                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
+
+                </p:submenu>  
+
+                <p:submenu label="Corretor"> 
+                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
+                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+
+                </p:submenu>
 
                 <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
 
@@ -60,7 +59,7 @@
                 <br/>
                 <h:outputText style="color:red" value="#{corretorMB.mensagem}"/>
             </center>
-            
+
             <h:form>
 
                 <h:inputHidden  value="#{corretorMB.corretor.id}"/> 
@@ -68,13 +67,13 @@
                 <p:panel header="CADASTRO DE CORRETOR" >
 
                     <center>
-                        
+
                         Matrícula *<br/><p:inputMask title="Matrícula" value="#{corretorMB.corretor.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
                         <br/>
                         Nome *<br/><p:inputText title="Nome" value="#{corretorMB.corretor.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
                         <br/>
                         E-mail <br/><p:inputText title="E-mail" value="#{corretorMB.corretor.email}" maxlength="150"> 
-                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
+                            <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
                         <br/>
                         Senha *<br/><p:password title="Senha" value="#{corretorMB.corretor.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
                         <br/>
@@ -82,17 +81,17 @@
                         <h:commandButton value="Inserir" action="#{corretorMB.inserir()}" /><h:message for="nome" style="color:red"/>
                         <h:commandButton value="Cancelar" action="administrador.xhtml"/>
                         <br/>
-                      
+
                     </center>
                     <h:messages style="color:red"/>
                 </p:panel>
-                
+
             </h:form>
-            
+
         </p:layoutUnit>
-        
+
         <br/>  
-        
+
     </h:body>
 </html>
 

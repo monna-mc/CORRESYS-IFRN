@@ -18,9 +18,9 @@ import modelo.Corretor;
 
 
 /**
- * @author Monnalisa Christina
+ * @author Weverton
  * ManagedBean do Administrador - projeto Corresys versão 1.0
- * data:25/03/2013
+ * data:23/04/2013
  */
 @ManagedBean
 @RequestScoped
