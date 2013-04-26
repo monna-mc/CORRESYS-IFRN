@@ -40,21 +40,21 @@
                         <p:menuitem value="Cadastrar" url="cadastrarAdministrador.xhtml" /> 
                         <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
                         <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
-                        
+
                     </p:submenu> 
 
                     <p:submenu label="Aluno">  
                         <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
                         <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
                         <p:menuitem value="Remover" url="removerAluno.xhtml" />
-                        
+
                     </p:submenu>  
 
                     <p:submenu label="Corretor"> 
                         <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
                         <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
                         <p:menuitem value="Remover" url="removerCorretor.xhtml" />
-                        
+
                     </p:submenu>
 
                     <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
@@ -64,19 +64,19 @@
             </h:form> 
 
             <br/>
-            
+
             <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
 
-            <center>
-                <br/>
-                <h:outputText style="color:red" value="#{alunoMB.mensagem}"/>
-            </center>
-            <h:form id="form1">
+                <center>
+                    <br/>
+                    <h:outputText style="color:red" value="#{redacaoMB.mensagem}"/>
+                </center>
+                <h:form id="form1">
 
-                <h:inputHidden  value="#{alunoMB.aluno.id}"/>
-                <br/>
-                <p:panel header="CADASTRO DE REDAÇÃO">
-                    
+                    <h:inputHidden  value="#{redacaoMB.redacao.id}"/>
+                    <br/>
+                    <p:panel header="CADASTRO DE REDAÇÃO">
+
                         <br/>
                         Tema : * <p:inputText  size="100" value="#{redacaoMB.redacao.tema}" required="true" requiredMessage="Tema obrigatória" maxlength="250" ></p:inputText><h:message for="tema"  style="color:red"/>
                         <br/>
@@ -84,41 +84,83 @@
                         Título : * <p:inputText size="100" value="#{redacaoMB.redacao.titulo}" required="true" requiredMessage="Campo título não foi preenchido" maxlength="250"></p:inputText><h:message for="nome" style="color:red"/>
                         <br/>
                         <br/>
-                        Nota *
-                        <br/>
-                        Status *
-                        <br/>
-                        Matrícula Aluno *
-                        <br/>
-                        Matrícula Corretor *
+                        Matrícula Aluno * <p:inputMask title="Matrícula" value="#{redacaoMB.redacao.matriculaAluno}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
                         <br/>
                         <br/>
-                        <h:commandButton value ="Inserir"></h:commandButton>
+                        Matrícula Corretor * <p:inputMask title="Matrícula" value="#{redacaoMB.redacao.matriculaCorretor}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
                         <br/>
-                    
-                    <h:messages style="color:red"/>
-                </p:panel>
-                
-            </h:form>
+                        <br/>
+                        Status: * 
+                        <p:selectOneMenu>    
 
-        </p:layoutUnit>
-            
+                            <f:selectItem itemLabel="Corrigida" itemValue="Corrigida" value="#{redacaoMB.redacao.status}"/>  
+                            <f:selectItem itemLabel="Recorrigida" itemValue="Recorrigida" value="#{redacaoMB.redacao.status}"/>
+                            <f:selectItem itemLabel="Não Corrigida" itemValue="Não Corrigida" value="#{redacaoMB.redacao.status}"/>
+                        </p:selectOneMenu>
+
+                        <br/>
+                        <br/>
+                        Escolher redação: * 
+                        <br/>
+                        <br/>
+                        <!--
+                        <h:form enctype="multipart/form-data">  
+
+                            <p:fileUpload value="#{fileUploadController.file}" mode="simple"/>  
+
+                            <h:commandButton ajax="false" value ="Inserir"
+                                             action="#{redacaoMB.inserir()}"/>  
+
+                        </h:form>
+                        -->
+
+                        <br/>
+                        <br/>
+                        <h:commandButton value="Inserir" action="#{redacaoMB.inserir()}" /><h:message for="nome" style="color:red"/>
+                        <p:spacer height="22"/>
+                        <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+                        <br/>
+
+                        <h:messages style="color:red"/>
+                    </p:panel>
+
+                </h:form>
+
+            </p:layoutUnit>
+
             <h:form enctype="multipart/form-data">  
 
-                
+                <!--
                 <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"  
                               mode="advanced"  
                               update="messages"  
                               auto="true"  
                               sizeLimit="1000000000"   
-                              allowTypes="/(\.|\/)(pdf)$/"/>  
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
                               
                 
                 
                 <p:growl id="messages" showDetail="true"/>  
-                   <br/>
-                   <br/>
-                   <br/>
+                !-->
+
+
+
+
+
+
+                <!--
+
+               <h:form id="form1" enctype="multipart/form-data">           
+                   <p:fileUpload mode="simple" invalidFileMessage="A foto deve ser JPG." value="#{redacaoMB.foto}"/>
+                   <h:commandButton value="Enviar" action="#{redacaoMB.upload()}"/>
+               </h:form> 
+               <img src="#{redacaoMB.foto}"/>
+
+                !-->
+
+                <br/>
+                <br/>
+                <br/>
             </h:form>  
 
         </h:body>
