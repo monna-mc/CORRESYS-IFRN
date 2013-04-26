@@ -99,7 +99,7 @@
             <p:panel id="formPanelPesquisa" header="PESQUISAR ADMINISTRADORES" >
                 <h:panelGrid columns="2">
                     <h:outputLabel value=""/>
-                    <p:inputText id="nomeDoAdministradores" style="text-transform: lowercase" maxlength="30" value ="#{corretorMB.corretorPesquisado}" required="true"/><p:message for="nomeDoAdministradores"/>
+                    <p:inputText id="nomeDoAdministradores" style="text-transform: lowercase" maxlength="30" value ="#{administradorMB.administradorPesquisado}" required="true"/><p:message for="nomeDoAdministradores"/>
                 </h:panelGrid>
                 <p:commandButton value="Pesquisar" action="#{administradorMB.pesquisarAdministradores()}" update=":formularioPesquisa, :tabela, :formulario"/>
             </p:panel>

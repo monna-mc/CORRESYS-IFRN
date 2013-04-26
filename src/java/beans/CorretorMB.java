@@ -55,6 +55,18 @@ public class CorretorMB {
         this.mensagem = mensagem;
     }
     
+     public List<Corretor> pesquisarCorretor() {
+        return dao.findCorretorEntities();
+    }
+    
+    public String getCorretorPesquisado() {
+        return corretorPesquisado;
+    }
+
+    public void setCorretorPesquisado(String corretorPesquisado) {
+        this.corretorPesquisado = corretorPesquisado;
+    }
+    
     //metodo de inserção no banco de dados
     public void inserir() {
         try {
@@ -129,17 +141,5 @@ public class CorretorMB {
             }
         }
         setCorretorPesquisado("");
-    }
-     
-     public List<Corretor> pesquisarCorretor() {
-        return dao.findCorretorEntities();
-    }
-    
-    public String getCorretorPesquisado() {
-        return corretorPesquisado;
-    }
-
-    public void setCorretorPesquisado(String corretorPesquisado) {
-        this.corretorPesquisado = corretorPesquisado;
     }
 }
