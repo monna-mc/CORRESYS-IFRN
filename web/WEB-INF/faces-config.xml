@@ -6,6 +6,30 @@
     xmlns="http://java.sun.com/xml/ns/javaee"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
-
-
+    
+    <managed-bean>
+        <managed-bean-name>loginAdmMB</managed-bean-name>
+        <managed-bean-class>beans.LoginAdmMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>loginAlunoMB</managed-bean-name>
+        <managed-bean-class>beans.LoginAlunoMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>loginCorretorMB</managed-bean-name>
+        <managed-bean-class>beans.LoginCorretorMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <navigation-rule>
+    <from-view-id>/homeCorresys.xhtml</from-view-id>
+    <navigation-case>
+      <from-outcome>sucesso</from-outcome>
+      <to-view-id>/administrador.xhtml</to-view-id>
+    </navigation-case>
+    
+  </navigation-rule>
+    
 </faces-config>

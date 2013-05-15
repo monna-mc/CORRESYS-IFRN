@@ -18,6 +18,8 @@
         <h:form>  
             <p:menubar>   
 
+                 <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home"/>  
+                 
                 <p:submenu label="Redação">  
                     <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
                     <p:menuitem value="Alterar" url="#" />  
@@ -45,7 +47,7 @@
 
                 </p:submenu>
 
-                <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
+                <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
 
 
             </p:menubar>  

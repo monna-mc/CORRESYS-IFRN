@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.Corretor;
@@ -133,5 +135,17 @@ public class CorretorJpaController implements Serializable {
             em.close();
         }
     }
-    
+     public Corretor findCorretor(String matricula, String senha){
+        EntityManager em = getEntityManager();
+        TypedQuery<Corretor> query;
+        query = em.createQuery("select c from Corretor c where c.matricula=:matricula" +
+                               " and c.senha=:senha", Corretor.class);
+        query.setParameter("matricula", matricula);
+        query.setParameter("senha", senha);
+        try{
+            return query.getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
+    }
 }

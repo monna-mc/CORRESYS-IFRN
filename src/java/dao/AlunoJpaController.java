@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.Aluno;
@@ -131,6 +133,20 @@ public class AlunoJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
+        }
+    }
+    
+     public Aluno findAluno(String matricula, String senha){
+        EntityManager em = getEntityManager();
+        TypedQuery<Aluno> query;
+        query = em.createQuery("select a from Aluno a where a.matricula=:matricula" +
+                               " and a.senha=:senha", Aluno.class);
+        query.setParameter("matricula", matricula);
+        query.setParameter("senha", senha);
+        try{
+            return query.getSingleResult();
+        }catch(NoResultException e){
+            return null;
         }
     }
     

@@ -5,8 +5,6 @@ import dao.AlunoJpaController;
 import dao.exceptions.NonexistentEntityException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -16,9 +14,8 @@ import javax.persistence.Persistence;
 import modelo.Aluno;
 
 /**
- * @author Monnalisa Christina
- * ManagedBean do Aluno - projeto Corresys versão 1.0
- * data:25/03/2013
+ * @author Monnalisa Christina ManagedBean do Aluno - projeto Corresys versão
+ * 1.0 data:25/03/2013
  */
 @ManagedBean
 @RequestScoped
@@ -30,11 +27,11 @@ public class AlunoMB {
     private List<Aluno> alunos = new ArrayList<Aluno>();
     private Aluno aluno = new Aluno();
     private String alunoPesquisado;
-    
+
     public AlunoMB() {
         pesquisar();
     }
-    
+
     public String getMensagem() {
         return mensagem;
     }
@@ -42,7 +39,7 @@ public class AlunoMB {
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
     }
-    
+
     public String getMensagemExclusao() {
         return mensagem;
     }
@@ -50,7 +47,7 @@ public class AlunoMB {
     public void setMensagemExclusao(String mensagem) {
         this.mensagem = mensagem;
     }
-    
+
     public String getMensagemAlteracao() {
         return mensagem;
     }
@@ -58,45 +55,34 @@ public class AlunoMB {
     public void setMensagemAlteracao(String mensagem) {
         this.mensagem = mensagem;
     }
-    
+
     //metodo de inserção no banco de dados
     public void inserir() {
-        try{
+        try {
             dao.create(aluno);
             this.setMensagem(this.aluno.getNome() + " cadastrado(a) com sucesso! ");
             aluno = new Aluno();
-        }catch(Exception ex){
-            setMensagem(this.aluno.getNome()+"já existe no sistema, cadastro não realizado!");
+        } catch (Exception ex) {
+            setMensagem(this.aluno.getNome() + "já existe no sistema, cadastro não realizado!");
             Logger.getLogger(AlunoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         pesquisar();
     }
-    
-      public  Aluno getAluno() {
-        return aluno;
-    }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
-
-    public List<Aluno> getAluList() {
-        return alunos;
-    }
-    
     public void excluir() {
         try {
             dao.destroy(aluno.getId());
             setMensagemExclusao(this.aluno.getNome() + "  foi excluído(a) com sucesso!");
-            aluno= new Aluno();
+            aluno = new Aluno();
         } catch (NonexistentEntityException ex) {
             this.setMensagemExclusao("id não existe");
             Logger.getLogger(AlunoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pesquisar();
     }
 
-     public void alterar() throws Exception {
+    public void alterar() throws Exception {
         try {
             dao.edit(aluno);
             setMensagemAlteracao(this.aluno.getNome() + " foi alterado(a) com sucesso!");
@@ -105,8 +91,9 @@ public class AlunoMB {
             this.setMensagemAlteracao("id não existe");
             Logger.getLogger(AlunoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pesquisar();
     }
-    
+
     public void carregar(Long id) {
         Aluno a = dao.findAluno(id);
         aluno.setMatricula(a.getMatricula());
@@ -121,30 +108,44 @@ public class AlunoMB {
             aluno = new Aluno();
         }
     }
-    
+
     public int pesquisar() {
         alunos = dao.findAlunoEntities();
         return alunos.size();
     }
-    
-    
+
     public void pesquisarAlunos() {
         alunos = new ArrayList<Aluno>();
         for (Aluno a : dao.findAlunoEntities()) {
-            if ((a.getMatricula().toLowerCase().contains(alunoPesquisado) || (a.getNome().toLowerCase().contains(alunoPesquisado)))){
+            if ((a.getMatricula().toLowerCase().contains(alunoPesquisado) || (a.getNome().toLowerCase().contains(alunoPesquisado)))) {
                 alunos.add(a);
-                
+
             }
         }
         setAlunoPesquisado("");
+       
     }
-    
-    
-    
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public List<Aluno> getAluList() {
+        return alunos;
+    }
+
+    public void setAluList(ArrayList<Aluno> alunos) {
+        this.alunos = alunos;
+    }
+
     public List<Aluno> pesquisarAluno() {
         return dao.findAlunoEntities();
     }
-    
+
     public String getAlunoPesquisado() {
         return alunoPesquisado;
     }

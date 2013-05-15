@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Atualizar_Corretor</title>
+        <title>Atualizar_Aministrador</title>
     </h:head>
     <h:body>
 
@@ -17,6 +17,8 @@
 
         <h:form>  
             <p:menubar>   
+
+                <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home" />  
 
                 <p:submenu label="Redação">  
                     <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
@@ -44,8 +46,7 @@
                     <p:menuitem value="Remover" url="removerCorretor.xhtml" />
 
                 </p:submenu>
-
-                <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorresys.xhtml" icon="ui-icon-close" />  
+                <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
 
 
             </p:menubar>  
@@ -57,35 +58,37 @@
         <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
             <center>
                 <br/>
-                <h:outputText style="color:red" value="#{corretorMB.mensagemAlteracao}"/>
+                <h:outputText style="color:red" value="#{administradorMB.mensagemAlterar}"/>
             </center>
-
             <h:form id="formulario">
 
-                <h:inputHidden  value="#{corretorMB.corretor.id}"/> 
+                <h:inputHidden  value="#{administradorMB.administrador.id}"/> 
                 <br/>
-                <p:panel header="ALTERAR CORRETOR">
+                <p:panel header="ALTERAR ADMINISTRADOR">
+
 
                     <br/>
-                    Matrícula : * <p:inputMask title="Matrícula" value="#{corretorMB.corretor.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
+                    Matrícula : * <p:inputMask title="Matrícula" value="#{administradorMB.administrador.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
                     <br/>
                     <br/>
-                    Nome : * <p:spacer height="24"/><p:inputText size="80" title="Nome" value="#{corretorMB.corretor.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                    Nome : * <p:spacer height="24"/><p:inputText  size = "80" title="Nome" value="#{administradorMB.administrador.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
                     <br/>
-                    E-mail : <p:spacer height="34"/><p:inputText size="80" title="E-mail" value="#{corretorMB.corretor.email}" maxlength="150"> 
-                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
+                    E-mail : <p:spacer height="34"/> <p:inputText size ="80" title="E-mail" value="#{administradorMB.administrador.email}" maxlength="150"> 
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
                     <br/>
                     <br/>
-                    Senha : * <p:spacer height="22"/><p:inputText title="Senha" value="#{corretorMB.corretor.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:inputText><h:message for="nome" style="color:red"/>
+                    Senha : * <p:spacer height="22"/><p:inputText title="Senha" value="#{administradorMB.administrador.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:inputText><h:message for="nome" style="color:red"/>
                     <br/>
                     <br/>
                     <hr/>
-                    <h:commandButton title="Atualizar" value="Atualizar" action="#{corretorMB.alterar()}" /><h:message for="nome" style="color:red"/>
+                    <h:commandButton value="Atualizar" action="#{administradorMB.alterar()}" /><h:message for="nome" style="color:red"/>
                     <p:spacer height="22"/>
-                    <h:commandButton title="Cancelar" value="Cancelar" action="administrador.xhtml"/>
+                    <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+
                     <br/>
 
                     <h:messages style="color:red"/>
+
                 </p:panel>
 
             </h:form>
@@ -95,20 +98,20 @@
         <br/>
 
         <h:form id="formularioPesquisa">
-            <p:panel id="formPanelPesquisa" header="PESQUISAR CORRETORES" >
+            <p:panel id="formPanelPesquisa" header="PESQUISAR ADMINISTRADORES" >
                 <h:panelGrid columns="2">
                     <h:outputLabel value=""/>
-                    <p:inputText id="nomeDoCorretor" style="text-transform: lowercase" maxlength="30" value ="#{corretorMB.corretorPesquisado}" required="true"/><p:message for="nomeDoCorretor"/>
+                    Matrícula / Nome : <p:spacer height="2"/> <p:inputText id="nomeDoAdministradores" size="50" style="text-transform: lowercase" maxlength="30" value ="#{administradorMB.administradorPesquisado}" required="true"/>
                 </h:panelGrid>
-                <p:commandButton value="Pesquisar" action="#{corretorMB.pesquisarCorretores()}" update=":formularioPesquisa, :tabela, :formulario"/>
+                <p:spacer height="10"/><p:commandButton image="ui-icon-search" value="Pesquisar" action="#{administradorMB.pesquisarAdministradores()}" update=":formularioPesquisa, :tabela, :formulario"/><p:message for="nomeDoAdministradores"/>
             </p:panel>
-        </h:form>
+        </h:form>          
 
         <br/>
-        <p:fieldset legend="LISTA DE CORRETORES" style="color: cornflowerblue">
+        <p:fieldset legend="LISTA DE ADMINISTRADORES" style="color: cornflowerblue">
             <h:form id="tabela">
 
-                <p:dataTable rendered="true" id="dataTable" var="c" value="#{corretorMB.corrList}" paginator="true" rows="10"  
+                <p:dataTable id="administrador" var="ad" value="#{administradorMB.admList}" rendered="true" paginator="true" rows="10"  
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
                     <f:facet name="header">  
 
@@ -118,8 +121,8 @@
                         <f:facet name="header">
                             <h:outputText value="Matrícula" />
                         </f:facet>
-                        <p:commandLink value="#{c.matricula}" update=":formulario">
-                            <f:setPropertyActionListener value="#{c}" target="#{corretorMB.corretor}"/>  
+                        <p:commandLink value="#{ad.matricula}" update=":formulario">
+                            <f:setPropertyActionListener value="#{ad}" target="#{administradorMB.administrador}"/>  
                         </p:commandLink>
                     </p:column>
 
@@ -127,8 +130,8 @@
                         <f:facet name="header">
                             <h:outputText value="Nome" />
                         </f:facet>
-                        <p:commandLink value="#{c.nome}" update=":formulario">
-                            <f:setPropertyActionListener value="#{c}" target="#{corretorMB.corretor}"/>  
+                        <p:commandLink value="#{ad.nome}" update=":formulario">
+                            <f:setPropertyActionListener value="#{ad}" target="#{administradorMB.administrador}"/>  
                         </p:commandLink>
                     </p:column>
 
@@ -136,8 +139,8 @@
                         <f:facet name="header">
                             <h:outputText value="E-mail" />
                         </f:facet>
-                        <p:commandLink value="#{c.email}" update=":formulario">
-                            <f:setPropertyActionListener value="#{c}" target="#{corretorMB.corretor}"/>  
+                        <p:commandLink value="#{ad.email}" update=":formulario">
+                            <f:setPropertyActionListener value="#{ad}" target="#{administradorMB.administrador}"/>  
                         </p:commandLink>
                     </p:column>
 
@@ -145,8 +148,8 @@
                         <f:facet name="header">
                             <h:outputText value="Senha" />
                         </f:facet>
-                        <p:commandLink value="#{c.senha}" update=":formulario">
-                            <f:setPropertyActionListener value="#{c}" target="#{corretorMB.corretor}"/>  
+                        <p:commandLink value="#{ad.senha}" update=":formulario">
+                            <f:setPropertyActionListener value="#{ad}" target="#{administradorMB.administrador}"/>  
                         </p:commandLink>
                     </p:column>
 

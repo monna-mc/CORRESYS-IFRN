@@ -89,6 +89,7 @@ public class CorretorMB {
             this.setMensagemAlteracao("id não existe");
             Logger.getLogger(CorretorMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pesquisar();
     }
 
     public void excluir() {
@@ -100,6 +101,7 @@ public class CorretorMB {
             this.setMensagemExclusao("id não existe");
             Logger.getLogger(CorretorMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pesquisar();
     }
 
     public void carregar(Long id) {

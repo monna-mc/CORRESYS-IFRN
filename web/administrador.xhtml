@@ -5,15 +5,15 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    
+
     <f:view contentType="text/html">
         <h:head>
-            
+
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
                 <title>Usuario_Administrador</title>
             </f:facet>
-            
+
         </h:head>
 
         <h:body>
@@ -24,46 +24,72 @@
 
                 <center for="nome" style="color:cornflowerblue"> 
                     <h1> 
-                        CORRESYS
+                        CORRESYS 
                     </h1>   
                 </center>
-                
-                <p:menubar>   
-                    
+                <h5>
+                    <blockquote>
+
+                        Bem vindo(a)  <h:outputText value="#{loginAdmMB.administrador.nome}" />
+
+                    </blockquote>  
+                </h5>
+
+                <p:menubar> 
+
+                    <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home" />  
+
                     <p:submenu label="Redação">  
-                        <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
+                    <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
                         <p:menuitem value="Alterar" url="#" />  
                         <p:menuitem value="Remover" url="#" />
-                       
-                    </p:submenu>  
+               </p:submenu>  
+  
 
                     <p:submenu label="Administrador"> 
                         <p:menuitem value="Cadastrar" url="cadastrarAdministrador.xhtml" /> 
                         <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
                         <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
-                        
+
                     </p:submenu> 
 
                     <p:submenu label="Aluno">  
                         <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
                         <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
                         <p:menuitem value="Remover" url="removerAluno.xhtml" />
-                        
+
                     </p:submenu>  
 
                     <p:submenu label="Corretor"> 
                         <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
                         <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
                         <p:menuitem value="Remover" url="removerCorretor.xhtml" />
-                        
+
                     </p:submenu>
 
-                    <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
-                    
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
+
                 </p:menubar>  
 
-           </h:form> 
+            </h:form> 
 
+            <h:form>
+                <br/>
+
+                <p:fieldset legend="INFORMAÇÕES">
+                    
+                    <br/>
+                    Nome: <h:outputText value="${loginAdmMB.administrador.nome}"/>
+                    <br/>
+                    Matrícula: <h:outputText value="${loginAdmMB.administrador.matricula}"/>
+                    <br/>
+                    
+                </p:fieldset>
+
+            </h:form>
+
+            <br/>
+            
         </h:body>
 
     </f:view>

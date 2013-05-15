@@ -1,9 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <f:view contentType="text/html">
 
@@ -15,7 +16,7 @@
         </h:head>
 
         <h:body>
-            
+
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
@@ -26,33 +27,80 @@
                     </center>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="west" size="175">
-                    <p:menu >
-                        <p:submenu label="Login">
-                            <p:menuitem value=" Administrador " url="http://localhost:8084/CORRESYS_1.0"/>
-                            <p:menuitem value=" Aluno" url="http://localhost:8084/CORRESYS_1.0/faces/homeAluno.xhtml"/>
-                            <p:menuitem value=" Professor" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml"/>
-                        </p:submenu>
-                    </p:menu>
-                </p:layoutUnit>
+                <p:layoutUnit position="center" resizable="true" visible="true">
 
+                    <form method="post"> 
 
-
-                <p:layoutUnit position="center">
-                    <form action="/CORRESYS_1.0/faces/private/administrador.xhtml" method="post"> 
                         <center>
-                            <p:panel header="LOGIN DO ADMINISTRADOR">
-                            <br/>
-                            <br/>
-                            Matrícula : <input size="16" type="text" name="email" style="color: cornflowerblue"/><br/>
-                            <br/>
-                            Senha: <input type="password" name="senha" style="color: cornflowerblue"/>
-                            <br/>
-                            <input type="submit" value="Enviar"/> 
 
-                            </p:panel>
+                            <p:accordionPanel value="LOGIN">  
+                                <p:tab title="LOGIN DO ADMINISTRADOR">  
+
+                                    <h:form id="formEntrarAdm">
+
+                                        <br/>
+                                        <h:messages style="color:red" />
+                                        <h:outputText value="Matrícula : "/>
+                                        <p:inputMask  value="#{loginAdmMB.matricula}" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
+                                        </p:inputMask>
+                                        <br/>
+                                        <br/>
+                                        <h:outputText value="Senha : "/><p:spacer height="20"/>
+                                        <p:password value="#{loginAdmMB.senha}" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
+                                        <div/>
+                                        <p:spacer height="70"/>
+                                        <h:commandButton value="Entrar" action="#{loginAdmMB.logar()}"/>
+
+                                    </h:form>
+
+                                </p:tab>  
+
+                                <p:tab title="LOGIN DO ALUNO"> 
+
+                                    <h:form id="formEntrarAlu" >
+
+                                        <br/>
+                                        <h:messages style="color:red"/>
+                                        <h:outputText value="Matrícula : "/>
+                                        <p:inputMask value="#{loginAlunoMB.matricula}" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
+                                        </p:inputMask>
+                                        <br/>
+                                        <br/>
+                                        <h:outputText value="Senha : "/><p:spacer height="20"/>
+                                        <p:password  value="#{loginAlunoMB.senha}" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
+                                        <div/>
+                                        <p:spacer height="70"/>
+                                        <h:commandButton value="Entrar" action="#{loginAlunoMB.logar()}"/>
+
+                                    </h:form>
+                                </p:tab>  
+
+                                <p:tab title="LOGIN DO CORRETOR"> 
+                                    <h:form id="formEntrarCor">
+
+                                        <br/>
+                                        <h:messages style="color:red"/>
+                                        <h:outputText value="Matrícula : "/>
+                                        <p:inputMask  value="#{loginCorretorMB.matricula}" required="true" requiredMessage="Campo obrigatório" maxlength="10" mask="9999999999" >
+                                        </p:inputMask>
+                                        <br/>
+                                        <br/>
+                                        <h:outputText value="Senha : "/><p:spacer height="20"/>
+                                        <p:password  value="#{loginCorretorMB.senha}" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
+                                        <div/>
+                                        <p:spacer height="70"/>
+                                        <h:commandButton value="Entrar" action="#{loginCorretorMB.logar()}" />
+
+                                    </h:form>
+
+                                </p:tab>  
+
+                            </p:accordionPanel> 
+
                         </center>
+
                     </form>
+
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="50" closable="true" collapsible="true">

@@ -5,7 +5,6 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-
     <f:view contentType="text/html">
         <h:head>
 
@@ -20,15 +19,15 @@
 
             <h:form>  
 
-                <p:growl id="messages"/>  
-
                 <center for="nome" style="color:cornflowerblue"> 
                     <h1> 
                         CORRESYS
                     </h1>   
                 </center>
 
-                <p:menubar>   
+                <p:menubar> 
+
+                    <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home" />  
 
                     <p:submenu label="Redação">  
                         <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
@@ -57,7 +56,7 @@
 
                     </p:submenu>
 
-                    <p:menuitem value="Sair" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml" icon="ui-icon-close" />  
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
 
                 </p:menubar>  
 
@@ -84,36 +83,32 @@
                         Título : * <p:inputText size="100" value="#{redacaoMB.redacao.titulo}" required="true" requiredMessage="Campo título não foi preenchido" maxlength="250"></p:inputText><h:message for="nome" style="color:red"/>
                         <br/>
                         <br/>
-                        Matrícula Aluno * <p:inputMask title="Matrícula" value="#{redacaoMB.redacao.matriculaAluno}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
+                        Matrícula Aluno : * <p:inputMask title="Matrícula" value="#{redacaoMB.redacao.matriculaAluno}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
                         <br/>
                         <br/>
-                        Matrícula Corretor * <p:inputMask title="Matrícula" value="#{redacaoMB.redacao.matriculaCorretor}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
+                        Matrícula Corretor : * <p:inputMask title="Matrícula" value="#{redacaoMB.redacao.matriculaCorretor}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
                         <br/>
                         <br/>
-                        Status: * 
-                        <p:selectOneMenu>    
+                        Status : *
+                        <p:selectOneMenu value="#{redacaoMB.redacao.status}" required="true" requiredMessage="Status obrigatório">    
 
-                            <f:selectItem itemLabel="Corrigida" itemValue="Corrigida" value="#{redacaoMB.redacao.status}"/>  
-                            <f:selectItem itemLabel="Recorrigida" itemValue="Recorrigida" value="#{redacaoMB.redacao.status}"/>
-                            <f:selectItem itemLabel="Não Corrigida" itemValue="Não Corrigida" value="#{redacaoMB.redacao.status}"/>
+                            <f:selectItem itemLabel="Corrigida" itemValue="Corrigida" />  
+                            <f:selectItem itemLabel="Recorrigida" itemValue="Recorrigida"/>
+                            <f:selectItem itemLabel="Nao Corrigida" itemValue=" Nao Corrigida"/>
+
                         </p:selectOneMenu>
-
                         <br/>
                         <br/>
-                        Escolher redação: * 
+                        Data : * <p:calendar value="#{redacaoMB.redacao.dat}" timeZone="GMT-3" navigator="true" pattern="dd/MM/yyyy" size="10"/>
                         <br/>
                         <br/>
-                        <!--
-                        <h:form enctype="multipart/form-data">  
+                        Redação : * <p:fileUpload fileUploadListener="#{redacaoMB.enviaImagem}" update="imagemTmp" 
+                                          cancelLabel="Cancelar" sizeLimit="99999999" label="Carregar redação" invalidFileMessage="Tipo de imagem inválido"
+                                          invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
+                                          allowTypes="/(\.|\/)(jpe?g|png|pdf)$/" mode="simple">
 
-                            <p:fileUpload value="#{fileUploadController.file}" mode="simple"/>  
-
-                            <h:commandButton ajax="false" value ="Inserir"
-                                             action="#{redacaoMB.inserir()}"/>  
-
-                        </h:form>
-                        -->
-
+                            </p:fileUpload>
+                       
                         <br/>
                         <br/>
                         <h:commandButton value="Inserir" action="#{redacaoMB.inserir()}" /><h:message for="nome" style="color:red"/>
@@ -128,40 +123,11 @@
 
             </p:layoutUnit>
 
-            <h:form enctype="multipart/form-data">  
 
-                <!--
-                <p:fileUpload fileUploadListener="#{fileUploadController.handleFileUpload}"  
-                              mode="advanced"  
-                              update="messages"  
-                              auto="true"  
-                              sizeLimit="1000000000"   
-                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>  
-                              
-                
-                
-                <p:growl id="messages" showDetail="true"/>  
-                !-->
+            <br/>
+            <br/>
+            <br/>
 
-
-
-
-
-
-                <!--
-
-               <h:form id="form1" enctype="multipart/form-data">           
-                   <p:fileUpload mode="simple" invalidFileMessage="A foto deve ser JPG." value="#{redacaoMB.foto}"/>
-                   <h:commandButton value="Enviar" action="#{redacaoMB.upload()}"/>
-               </h:form> 
-               <img src="#{redacaoMB.foto}"/>
-
-                !-->
-
-                <br/>
-                <br/>
-                <br/>
-            </h:form>  
 
         </h:body>
 

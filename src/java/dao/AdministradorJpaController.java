@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.Administrador;
@@ -134,4 +136,17 @@ public class AdministradorJpaController implements Serializable {
         }
     }
     
+    public Administrador findAdm(String matricula, String senha){
+        EntityManager em = getEntityManager();
+        TypedQuery<Administrador> query;
+        query = em.createQuery("select adm from Administrador adm where adm.matricula=:matricula" +
+                               " and adm.senha=:senha", Administrador.class);
+        query.setParameter("matricula", matricula);
+        query.setParameter("senha", senha);
+        try{
+            return query.getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
+    }
 }

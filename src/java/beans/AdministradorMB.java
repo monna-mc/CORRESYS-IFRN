@@ -90,6 +90,7 @@ public class AdministradorMB {
             this.setMensagemAlterar("id não existe");
             Logger.getLogger(AdministradorMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pesquisar();
     }
 
     public void excluir() {
@@ -101,6 +102,7 @@ public class AdministradorMB {
             this.setMensagemExclusao("id não existe");
             Logger.getLogger(AdministradorMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pesquisar();
     }
 
     public void carregar(Long id) {

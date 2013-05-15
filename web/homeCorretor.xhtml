@@ -39,21 +39,43 @@
 
 
 
-                <p:layoutUnit position="center">
-                    <form action="/CORRESYS_1.0/faces/private/administrador.xhtml" method="post"> 
+               <p:layoutUnit position="center">
+                    <form > 
                         <center>
-                            <p:panel header="LOGIN DO CORRETOR">
-                            <br/>
-                            <br/>
-                            Matrícula : <input size="16" type="text" name="email" style="color: cornflowerblue"/><br/>
-                            <br/>
-                            Senha: <input type="password" name="senha" style="color: cornflowerblue" />
-                            <br/>
-                            <input type="submit" value="Enviar"/> 
+
+                            <p:panel header="LOGIN DO CORRETOR" >
+                                <br/>
+                                <p:menubar >
+
+                                    <p:menuitem value=" Administrador " url="http://localhost:8084/CORRESYS_1.0"/>
+                                    <p:menuitem value=" Aluno" url="http://localhost:8084/CORRESYS_1.0/faces/homeAluno.xhtml"/>
+                                    <p:menuitem value=" Corretor" url="http://localhost:8084/CORRESYS_1.0/faces/homeCorretor.xhtml"/>
+
+                                </p:menubar>
+
+                                <br/>
+
+                                <h:form id="formEntrar">
+                                    <h:messages style="color:red"/>
+                                    <h:outputText value="matricula "/>
+                                    <p:inputMask id="campoMatricula" value="#{loginCorretorMB.matricula}" required="true" requiredMessage="Campo obrigatório" validatorMessage="Matrícula errada" maxlength="10" mask="9999999999" >
+                                    </p:inputMask>
+                                    <br/>
+                                    <br/>
+                                    <h:outputText value="Senha "/>
+                                    <p:password id="campoSenha" value="#{loginCorretorMB.senha}" required="true" requiredMessage="Campo obrigatório" maxlength="30"/>
+                                    <br/>
+                                    <br/>
+                                    <h:commandButton value="Entrar" action="#{loginCorretorMB.logar()}"/>
+                                
+                                   
+                                </h:form>
                             </p:panel>
+
                         </center>
                     </form>
                 </p:layoutUnit>
+
 
                 <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
 

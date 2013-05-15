@@ -2,10 +2,12 @@
 package modelo;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 
 /**
  * @author Monnalisa Christina
@@ -20,6 +22,7 @@ public class Aluno implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(unique=true)
     private String matricula;
     private String nome;
     private String email;
@@ -27,7 +30,7 @@ public class Aluno implements Serializable {
     private String curso;
     private String turma;
     
-
+            
     public Long getId() {
         return id;
     }
@@ -144,5 +147,5 @@ public class Aluno implements Serializable {
     public String toString() {
         return "modelo.Aluno[ id=" + id + " ]";
     }
-    
+ 
 }

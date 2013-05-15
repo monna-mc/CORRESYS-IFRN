@@ -2,10 +2,12 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  * @author Monnalisa Christina
@@ -22,11 +24,39 @@ public class Redacao implements Serializable {
     private Long id;
     private String tema;
     private String titulo;
-    private float nota;
+    private float nota = (float) 0.0;
     private String status;
     private String matriculaCorretor;
     private String matriculaAluno;
+    private byte[] imagem;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dat;
+    //private List<Redacao> redacoes = new ArrayList<Redacao>();
+    
+     @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Redacao)) {
+            return false;
+        }
+        Redacao other = (Redacao) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "modelo.Redacao[ id=" + id + " ]";
+    }
     
     public Long getId() {
         return id;
@@ -119,32 +149,32 @@ public class Redacao implements Serializable {
     public void setMatriculaAluno(String matriculaAluno) {
         this.matriculaAluno = matriculaAluno;
     }
-    
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    /**
+     * @return the imagem
+     */
+    public byte[] getImagem() {
+        return imagem;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Redacao)) {
-            return false;
-        }
-        Redacao other = (Redacao) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    /**
+     * @param imagem the imagem to set
+     */
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
-    @Override
-    public String toString() {
-        return "modelo.Redacao[ id=" + id + " ]";
+    /**
+     * @return the dat
+     */
+    public Date getDat() {
+        return dat;
     }
 
-   
+    /**
+     * @param dat the dat to set
+     */
+    public void setDat(Date dat) {
+        this.dat = dat;
+    }
 }
