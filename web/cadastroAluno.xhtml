@@ -17,12 +17,12 @@
 
         <h:form>
             <p:menubar>
-                 <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home"/>  
+                <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home"/>  
 
                 <p:submenu label="Redação">
                     <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
-                    <p:menuitem value="Alterar" url="#" />  
-                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Alterar" url="alterarRedacao.xhtml" /> 
+                    <p:menuitem value="Remover" url="removerRedacao.xhtml" />
                 </p:submenu>  
 
                 <p:submenu label="Administrador"> 
@@ -46,7 +46,7 @@
 
                 </p:submenu>
 
-                 <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
+                <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
 
                 <f:facet name="options">
                     <p:inputText style="margin-right:70px"/>
@@ -71,30 +71,30 @@
                 <p:panel header="CADASTRO DE ALUNO">
 
                     <br/>
-                        Matrícula : * <p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
-                        <br/>
-                        <br/>
-                        Nome : *  <p:spacer height="24"/> <p:inputText  size="80" title="Nome" value="#{alunoMB.aluno.nome}" required="true" requiredMessage="Campo nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
-                        <br/>
-                        E-mail : <p:spacer height="34"/> <p:inputText size="80" title="E-mail" value="#{alunoMB.aluno.email}"  maxlength="150">
+                    Matrícula : * <p:inputMask title="Matrícula" value="#{alunoMB.aluno.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula"  style="color:red"/>
+                    <br/>
+                    <br/>
+                    Nome : *  <p:spacer height="24"/> <p:inputText  size="80" title="Nome" value="#{alunoMB.aluno.nome}" required="true" requiredMessage="Campo nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    E-mail : <p:spacer height="34"/> <p:inputText size="80" title="E-mail" value="#{alunoMB.aluno.email}"  maxlength="150">
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>
-                        <br/>
-                        <br/>
-                        Senha : * <p:spacer height="20"/> <p:password title="Senha" value="#{alunoMB.aluno.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
-                        <br/>
-                        <br/>
-                        Curso : * <p:spacer height="22"/> <p:inputText size="80" title="Curso" value="#{alunoMB.aluno.curso}" required="true" requiredMessage="Campo curso não foi preenchido" maxlength="150"></p:inputText><h:message for="curso" style="color:red"/>
-                        <br/>
-                        <br/>
-                        Turma : * <p:spacer height="20"/> <p:inputText size="80" title="Turma" value="#{alunoMB.aluno.turma}" required="true" requiredMessage="Campo turma não foi preenchido" maxlength="150"></p:inputText><h:message for="turma" style="color:red"/>
-                        <br/>
-                        <br/>
-                        <hr/>
-                        <h:commandButton value="Inserir" action="#{alunoMB.inserir()}" /><h:message for="nome" style="color:red"/>
-                        <p:spacer height="22"/>
-                        <h:commandButton value="Cancelar" action="administrador.xhtml"/>
-                        <br/>
-                   
+                    <br/>
+                    <br/>
+                    Senha : * <p:spacer height="20"/> <p:password title="Senha" value="#{alunoMB.aluno.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
+                    <br/>
+                    <br/>
+                    Curso : * <p:spacer height="22"/> <p:inputText size="80" title="Curso" value="#{alunoMB.aluno.curso}" required="true" requiredMessage="Campo curso não foi preenchido" maxlength="150"></p:inputText><h:message for="curso" style="color:red"/>
+                    <br/>
+                    <br/>
+                    Turma : * <p:spacer height="20"/> <p:inputText size="80" title="Turma" value="#{alunoMB.aluno.turma}" required="true" requiredMessage="Campo turma não foi preenchido" maxlength="150"></p:inputText><h:message for="turma" style="color:red"/>
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <h:commandButton value="Inserir" action="#{alunoMB.inserir()}" /><h:message for="nome" style="color:red"/>
+                    <p:spacer height="22"/>
+                    <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+                    <br/>
+
                     <h:messages style="color:red"/>
                 </p:panel>
 

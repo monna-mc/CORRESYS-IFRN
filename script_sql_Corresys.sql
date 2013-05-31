@@ -14,9 +14,6 @@ CREATE TABLE administrador
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE administrador
-  OWNER TO postgres;
-
 
 -- Table: aluno
 
@@ -36,9 +33,6 @@ CREATE TABLE aluno
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE aluno
-  OWNER TO postgres;
-
 
 -- Table: corretor
 
@@ -56,9 +50,6 @@ CREATE TABLE corretor
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE corretor
-  OWNER TO postgres;
-
 
 -- Table: redacao
 
@@ -80,9 +71,6 @@ CREATE TABLE redacao
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE redacao
-  OWNER TO postgres;
-
 
 -- Table: sequence
 
@@ -97,5 +85,3 @@ CREATE TABLE sequence
 WITH (
   OIDS=FALSE
 );
-ALTER TABLE sequence
-  OWNER TO postgres;

@@ -108,7 +108,7 @@ public class LoginCorretorMB {
         if (aux== true){         
             return "/corretor.xhtml";
         } else {
-            FacesUtil.adicionarMensagem("formEntrarCor", "E-mail e senha não conferem !");
+            FacesUtil.adicionarMensagem("formEntrarCor", "Matrícula e senha não conferem !");
             return null;
         }
     }

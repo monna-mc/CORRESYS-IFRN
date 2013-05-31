@@ -111,7 +111,7 @@ public class LoginAlunoMB {
         if (aux== true){         
             return "/aluno.xhtml";
         } else {
-            FacesUtil.adicionarMensagem("formEntrarAlu", "E-mail e senha não conferem !");
+            FacesUtil.adicionarMensagem("formEntrarAlu", "Matrícula e senha não conferem !");
             return null;
         }
     }

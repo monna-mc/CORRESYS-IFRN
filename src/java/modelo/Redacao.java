@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 /**
  * @author Monnalisa Christina
  * Classe redação - projeto Corresys versão 1.0
- * data:25/03/2013
+ * data:15/05/2013
  */
 
 @Entity
@@ -31,7 +31,6 @@ public class Redacao implements Serializable {
     private byte[] imagem;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dat;
-    //private List<Redacao> redacoes = new ArrayList<Redacao>();
     
      @Override
     public int hashCode() {

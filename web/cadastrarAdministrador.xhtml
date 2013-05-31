@@ -17,37 +17,37 @@
 
         <h:form>  
             <p:menubar>  
-                
-                 <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home" />  
+
+                <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home" />  
 
                 <p:submenu label="Redação">  
                     <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
-                        <p:menuitem value="Alterar" url="#" />  
-                        <p:menuitem value="Remover" url="#" />
-               </p:submenu>  
+                    <p:menuitem value="Alterar" url="alterarRedacao.xhtml" /> 
+                    <p:menuitem value="Remover" url="removerRedacao.xhtml" />
+                </p:submenu>  
 
-                    <p:submenu label="Administrador"> 
-                        <p:menuitem value="Cadastrar" url="cadastrarAdministrador.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
-                        <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
-                        
-                    </p:submenu> 
+                <p:submenu label="Administrador"> 
+                    <p:menuitem value="Cadastrar" url="cadastrarAdministrador.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAdministrador.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAdministrador.xhtml" />
 
-                    <p:submenu label="Aluno">  
-                        <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
-                        <p:menuitem value="Remover" url="removerAluno.xhtml" />
-                        
-                    </p:submenu>  
+                </p:submenu> 
 
-                    <p:submenu label="Corretor"> 
-                        <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
-                        <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
-                        <p:menuitem value="Remover" url="removerCorretor.xhtml" />
-                        
-                    </p:submenu>
+                <p:submenu label="Aluno">  
+                    <p:menuitem value="Cadastrar" url="cadastroAluno.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarAluno.xhtml" />  
+                    <p:menuitem value="Remover" url="removerAluno.xhtml" />
 
-                 <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
+                </p:submenu>  
+
+                <p:submenu label="Corretor"> 
+                    <p:menuitem value="Cadastrar" url="cadastroCorretor.xhtml" /> 
+                    <p:menuitem value="Alterar" url="alterarCorretor.xhtml" />
+                    <p:menuitem value="Remover" url="removerCorretor.xhtml" />
+
+                </p:submenu>
+
+                <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
 
 
             </p:menubar>  
@@ -61,43 +61,43 @@
                 <br/>
                 <h:outputText style="color:red" value="#{administradorMB.mensagem}"/>
             </center>
-            
+
             <h:form>
 
                 <h:inputHidden  value="#{administradorMB.administrador.id}"/> 
                 <br/>
                 <p:panel header="CADASTRO DE ADMINISTRADOR" >
-                    
-                        <br/>
-                        Matrícula : * <p:inputMask title="Matrícula" value="#{administradorMB.administrador.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
-                        <br/>
-                        <br/>
-                        Nome : * <p:spacer height="24"/><p:inputText  size = "80" title="Nome" value="#{administradorMB.administrador.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
-                        <br/>
-                        E-mail : <p:spacer height="34"/> <p:inputText size ="80" title="E-mail" value="#{administradorMB.administrador.email}" maxlength="150"> 
+
+                    <br/>
+                    Matrícula : * <p:inputMask title="Matrícula" value="#{administradorMB.administrador.matricula}" required="true" requiredMessage="Matrícula obrigatória" maxlength="10" mask="9999999999"></p:inputMask><h:message for="matrícula" style="color:red"/>
+                    <br/>
+                    <br/>
+                    Nome : * <p:spacer height="24"/><p:inputText  size = "80" title="Nome" value="#{administradorMB.administrador.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
+                    <br/>
+                    E-mail : <p:spacer height="34"/> <p:inputText size ="80" title="E-mail" value="#{administradorMB.administrador.email}" maxlength="150"> 
                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
-                        <br/>
-                        <br/>
-                        Senha : * <p:spacer height="22"/><p:password title="Senha" value="#{administradorMB.administrador.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
-                        <br/>
-                        <br/>
-                        <hr/>
-                        <h:commandButton value="Inserir" action="#{administradorMB.inserir()}" /><h:message for="nome" style="color:red"/>
-                        <p:spacer height="22"/>
-                        <h:commandButton value="Cancelar" action="administrador.xhtml"/>
-                       
-                        <br/>
-                       
+                    <br/>
+                    <br/>
+                    Senha : * <p:spacer height="22"/><p:password title="Senha" value="#{administradorMB.administrador.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:password><h:message for="nome" style="color:red"/>
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <h:commandButton value="Inserir" action="#{administradorMB.inserir()}" /><h:message for="nome" style="color:red"/>
+                    <p:spacer height="22"/>
+                    <h:commandButton value="Cancelar" action="administrador.xhtml"/>
+
+                    <br/>
+
                     <h:messages style="color:red"/>
-                 
+
                 </p:panel>
-                
+
             </h:form>
-            
+
         </p:layoutUnit>
-        
+
         <br/>  
-        
+
     </h:body>
 </html>
 

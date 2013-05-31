@@ -9,7 +9,7 @@
 
         <f:facet name="first">
             <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-            <title>Cadastro_redacao</title>
+            <title>Remover_redacao</title>
         </f:facet>
 
     </h:head>
@@ -69,13 +69,12 @@
                 <br/>
                 <h:outputText style="color:red" value="#{redacaoMB.mensagem}"/>
             </center>
-            <p:growl/>
             <h:form id="form1" enctype="multipart/form-data">
 
                 <h:inputHidden  value="#{redacaoMB.redacao.id}"/>
                 <br/>
                 <p:panel header="CADASTRO DE REDAÇÃO">
-    
+
                     <br/>
                     Tema : * <p:inputText  size="100" value="#{redacaoMB.redacao.tema}" required="true" requiredMessage="Tema obrigatória" maxlength="250" ></p:inputText><h:message for="tema"  style="color:red"/>
                     <br/>
@@ -102,14 +101,16 @@
                     Data : * <p:calendar value="#{redacaoMB.redacao.dat}" timeZone="GMT-3" navigator="true" pattern="dd/MM/yyyy" size="10"/>
                     <br/>
                     <br/>
-                    Redação : * <p:fileUpload mode="simple" value="#{redacaoMB.foto}" sizeLimit="1000000000" allowTypes="/(\.|\/)(jpe?g)$/"/>  />
+                    <p:fileUpload mode="simple" invalidFileMessage="Mande um JPG." value="#{redacaoMB.foto}"/>
                     <br/>
                     <br/>
-                    <hr/>
                     <h:commandButton value="Inserir" action="#{redacaoMB.upload()}" /><h:message for="nome" style="color:red"/>
                     <p:spacer height="22"/>
+                   
                     <h:commandButton value="Cancelar" action="administrador.xhtml"/>
                     <br/>
+                    <br/>
+                    <p:graphicImage value="#{redacaoMB.fotoStreamed}"/>
                     <br/>
                     <h:messages style="color:red"/>
                 </p:panel>
@@ -118,6 +119,79 @@
 
         </p:layoutUnit>
 
+        <br/>
+        <p:fieldset legend="LISTA DE REDAÇÕES" style="color: cornflowerblue">
+            <h:form id="tabela">
+
+                <p:dataTable rendered="true" id="redacao" var="r" value="#{redacaoMB.redList}" paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
+                    <f:facet name="header">  
+
+                    </f:facet>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tema" />
+                        </f:facet>
+                        <p:commandLink value="#{r.tema}" update=":formulario">
+                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Título" />
+                        </f:facet>
+                        <p:commandLink value="#{r.titulo}" update=":formulario">
+                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Matrícula do Aluno" />
+                        </f:facet>
+                        <p:commandLink value="#{r.matriculaAluno}" update=":formulario">
+                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
+                        </p:commandLink>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Matrícula do Corretor" />
+                        </f:facet>
+                        <p:commandLink value="#{r.matriculaCorretor}" update=":formulario">
+                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
+                        </p:commandLink>
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status" />
+                        </f:facet>
+                        <p:commandLink value="#{r.status}" update=":formulario">
+                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
+                        </p:commandLink>
+                    </p:column>
+                    
+                     <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data" />
+                        </f:facet>
+                        <p:commandLink value="#{r.dat}" update=":formulario">
+                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
+                        </p:commandLink>
+                    </p:column>
+                    
+                </p:dataTable>
+
+            </h:form>
+
+        </p:fieldset>
+        
+        
     </h:body>
+
 </html>
+
 

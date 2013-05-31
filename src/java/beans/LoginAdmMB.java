@@ -108,7 +108,7 @@ public class LoginAdmMB {
         if (aux== true){
             return "sucesso";
         } else {
-            FacesUtil.adicionarMensagem("formEntrarAdm", "E-mail e senha não conferem !");
+            FacesUtil.adicionarMensagem("formEntrarAdm", "Matrícula e senha não conferem !");
             return null;
         }
     }

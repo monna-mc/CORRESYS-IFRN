@@ -119,13 +119,13 @@ public class AdministradorMB {
     }
 
     public int pesquisar() {
-        administradores = dao.findAdministradorEntities();
+        setAdministradores(dao.findAdministradorEntities());
         return administradores.size();
     }
     
     
     public void pesquisarAdministradores() {
-        administradores = new ArrayList<Administrador>();
+        setAdministradores(new ArrayList<Administrador>());
         for (Administrador ad : dao.findAdministradorEntities()) {
             if ((ad.getMatricula().toLowerCase().contains(administradorPesquisado) || (ad.getNome().toLowerCase().contains(administradorPesquisado)))){
                 administradores.add(ad);
@@ -145,5 +145,12 @@ public class AdministradorMB {
 
     public void setAdministradorPesquisado(String administradorPesquisado) {
         this.administradorPesquisado = administradorPesquisado;
+    }
+
+    /**
+     * @param administradores the administradores to set
+     */
+    public void setAdministradores(List<Administrador> administradores) {
+        this.administradores = administradores;
     }
 }

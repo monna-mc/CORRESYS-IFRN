@@ -17,13 +17,13 @@
 
         <h:form>  
             <p:menubar>  
-                
-                 <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home" />  
+
+                <p:menuitem value="Início" url="administrador.xhtml" icon="ui-icon-home" />  
 
                 <p:submenu label="Redação">  
                     <p:menuitem value="Inserir" url="cadastrarRedacao.xhtml" />
-                    <p:menuitem value="Alterar" url="#" />  
-                    <p:menuitem value="Remover" url="#" />
+                    <p:menuitem value="Alterar" url="alterarRedacao.xhtml" /> 
+                    <p:menuitem value="Remover" url="removerRedacao.xhtml" />
                 </p:submenu>  
 
                 <p:submenu label="Administrador"> 
@@ -47,7 +47,7 @@
 
                 </p:submenu>
 
-                 <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
+                <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAdmMB.deslogar()}"/> 
 
 
             </p:menubar>  
@@ -74,7 +74,7 @@
                     Nome : * <p:spacer height="24"/><p:inputText size="80" title="Nome" value="#{corretorMB.corretor.nome}" required="true" requiredMessage="Campos nome não foi preenchido" maxlength="150"></p:inputText><h:message for="nome" style="color:red"/>
                     <br/>
                     E-mail : <p:spacer height="34"/><p:inputText size="80" title="E-mail" value="#{corretorMB.corretor.email}" maxlength="150"> 
-                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
+                        <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/></p:inputText><h:message for="email" style="color:red"/>                   
                     <br/>
                     <br/>
                     Senha : * <p:spacer height="22"/><p:inputText title="Senha" value="#{corretorMB.corretor.senha}" required="true" requiredMessage="Campo senha obrigatório" maxlength="30"></p:inputText><h:message for="nome" style="color:red"/>
@@ -96,14 +96,14 @@
 
         <br/>
 
-         <h:form id="formularioPesquisa">
+        <h:form id="formularioPesquisa">
             <p:panel id="formPanelPesquisa" header="PESQUISAR CORRETORES" >
                 <h:panelGrid columns="2">
                     <h:outputLabel value=""/>
-                   Matrícula / Nome : <p:spacer height="2"/> <p:inputText id="nomeDoCorretor" size="50" style="text-transform: lowercase" maxlength="30" value ="#{corretorMB.corretorPesquisado}" required="true"/>
+                    Matrícula / Nome : <p:spacer height="2"/> <p:inputText id="nomeDoCorretor" size="50" style="text-transform: lowercase" maxlength="30" value ="#{corretorMB.corretorPesquisado}" required="true"/>
                 </h:panelGrid>
                 <p:spacer height="10"/><p:commandButton image="ui-icon-search" value="Pesquisar" action="#{corretorMB.pesquisarCorretores()}" update=":formularioPesquisa, :tabela, :formulario"/>
-            <p:message for="nomeDoCorretor"/>
+                <p:message for="nomeDoCorretor"/>
             </p:panel>
         </h:form>
 
