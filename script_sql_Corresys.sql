@@ -58,6 +58,11 @@ WITH (
 CREATE TABLE redacao
 (
   id bigint NOT NULL,
+  comp1 integer,
+  comp2 integer,
+  comp3 integer,
+  comp4 integer,
+  comp5 integer,
   dat date,
   imagem bytea,
   matriculaaluno character varying(255),
@@ -66,7 +71,13 @@ CREATE TABLE redacao
   status character varying(255),
   tema character varying(255),
   titulo character varying(255),
-  CONSTRAINT redacao_pkey PRIMARY KEY (id)
+  CONSTRAINT redacao_pkey PRIMARY KEY (id),
+  CONSTRAINT fk_redacao_matriculaaluno FOREIGN KEY (matriculaaluno)
+      REFERENCES aluno (matricula) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT fk_redacao_matriculacorretor FOREIGN KEY (matriculacorretor)
+      REFERENCES corretor (matricula) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
   OIDS=FALSE

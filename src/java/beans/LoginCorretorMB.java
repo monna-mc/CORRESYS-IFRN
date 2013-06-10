@@ -39,9 +39,6 @@ public class LoginCorretorMB {
             CorretorMB umb = FacesUtil.getCorretorMB();
             umb.setCorretor(corretor);
             
-            getCorretor().setMatricula(null);
-            getCorretor().setSenha(null);
-            
             return true;
         } else {
             return false;
@@ -120,9 +117,9 @@ public class LoginCorretorMB {
     public String deslogar(){
         setDeslogado();
         corretor = new Corretor();
-        matricula = "";        
-        senha = "";
-        return "/homeCorretor.xhtml";
+        matricula = null;        
+        senha = null;
+        return "/homeCorresys.xhtml";
     }
     
     /**

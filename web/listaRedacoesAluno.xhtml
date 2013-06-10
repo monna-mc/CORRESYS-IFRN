@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Usuario_Aluno</title>
+            </f:facet>
+
+        </h:head>
+
+        <h:body>
+
+            <h:form>  
+
+                <p:growl id="messages"/>  
+
+                <center for="nome" style="color:cornflowerblue"> 
+                    <h1> 
+                        CORRESYS 
+                    </h1>   
+                </center>
+                <h5>
+                    <blockquote>
+
+                        Bem vindo(a)  <h:outputText value="#{loginAlunoMB.aluno.nome}" />
+
+                    </blockquote>  
+                </h5>
+
+                <p:menubar> 
+
+                    <p:menuitem value="Início" url="aluno.xhtml" icon="ui-icon-home" />  
+
+                    <p:submenu label="Lista de Redação">  
+                        <p:menuitem value="Redações" url="listaRedacoesAluno.xhtml" />
+                    </p:submenu> 
+
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAlunoMB.deslogarA()}"/>  
+
+                </p:menubar>  
+
+            </h:form> 
+            <br/>
+            <p:fieldset legend="LISTA DE REDAÇÕES" style="color: cornflowerblue">
+                <p:dataTable id="tabelaRed" value="#{redacaoMB.redList}" var="con" rendered="#{redacaoMB.pesquisar() > 0}" paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Tema" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${con.tema}">   
+                                <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Título" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${con.titulo}">   
+                                <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Matrícula Aluno" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${con.matriculaAluno}">   
+                                <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Matricula Corretor" style="color: white"/>                   
+                        </f:facet>
+                        <h:form >
+                            <h:commandLink action="#{redacaoMB.carregar(con.id)}">
+                                <h:outputText value="${con.matriculaCorretor}"/>
+                            </h:commandLink>                        
+                        </h:form>
+
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nota" style="color: white"/>                   
+                        </f:facet>
+                        <h:form>
+                            <h:commandLink action="#{redacaoMB.carregar(con.id)}">
+                                <h:outputText  value="${con.nota}"/>
+                            </h:commandLink>                        
+                        </h:form>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status" style="color: white"/>                   
+                        </f:facet>
+                        <h:form>
+                            <h:commandLink action="#{redacaoMB.carregar(con.id)}">
+                                <h:outputText  value="${con.status}"/>
+                            </h:commandLink>                        
+                        </h:form>
+                    </p:column>
+
+                </p:dataTable>  
+
+            </p:fieldset>
+
+            <br/>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+
+

@@ -41,10 +41,7 @@ public class LoginAlunoMB {
             aluno = a;
             AlunoMB umb = FacesUtil.getAlunoMB();
             umb.setAluno(aluno);
-            
-            getAluno().setMatricula(null);
-            getAluno().setSenha(null);
-            
+      
             return true;
         } else {
             return false;
@@ -120,12 +117,12 @@ public class LoginAlunoMB {
      * 
      * @return a página inicial.
      */
-    public String deslogar(){
+    public String deslogarA(){
         setDeslogado();
         aluno = new Aluno();
-        matricula = "";        
-        senha = "";
-        return "/homeAluno.xhtml";
+        matricula = null;        
+        senha = null;
+        return "/homeCorresys.xhtml";
     }
     
     /**

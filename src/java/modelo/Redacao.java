@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -24,13 +25,18 @@ public class Redacao implements Serializable {
     private Long id;
     private String tema;
     private String titulo;
-    private float nota = (float) 0.0;
+    private float nota = (float) 0.0;//Nota geral da redação
     private String status;
     private String matriculaCorretor;
     private String matriculaAluno;
     private byte[] imagem;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dat;
+    private int comp1 = (int) 0;//nota da demonstração de domínio da norma padrão 
+    private int comp2 = (int) 0;// nota da compreenção da proposta de redação
+    private int comp3 = (int) 0;//nota de interpretação de informações em defesa de um ponto de vista.
+    private int comp4 = (int) 0;//nota de Demonstração de conhecimento linguísticos necessários à construção da argumentação
+    private int comp5 = (int) 0;// nota da Elaboração de proposta
     
      @Override
     public int hashCode() {
@@ -120,6 +126,34 @@ public class Redacao implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+   
+    /**
+     * @return the imagem
+     */
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    /**
+     * @param imagem the imagem to set
+     */
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
+    /**
+     * @return the dat
+     */
+    public Date getDat() {
+        return dat;
+    }
+
+    /**
+     * @param dat the dat to set
+     */
+    public void setDat(Date dat) {
+        this.dat = dat;
+    }
 
     /**
      * @return the matriculaCorretor
@@ -150,30 +184,72 @@ public class Redacao implements Serializable {
     }
 
     /**
-     * @return the imagem
+     * @return the comp1
      */
-    public byte[] getImagem() {
-        return imagem;
+    public int getComp1() {
+        return comp1;
     }
 
     /**
-     * @param imagem the imagem to set
+     * @param comp1 the comp1 to set
      */
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
+    public void setComp1(int comp1) {
+        this.comp1 = comp1;
     }
 
     /**
-     * @return the dat
+     * @return the comp2
      */
-    public Date getDat() {
-        return dat;
+    public int getComp2() {
+        return comp2;
     }
 
     /**
-     * @param dat the dat to set
+     * @param comp2 the comp2 to set
      */
-    public void setDat(Date dat) {
-        this.dat = dat;
+    public void setComp2(int comp2) {
+        this.comp2 = comp2;
+    }
+
+    /**
+     * @return the comp3
+     */
+    public int getComp3() {
+        return comp3;
+    }
+
+    /**
+     * @param comp3 the comp3 to set
+     */
+    public void setComp3(int comp3) {
+        this.comp3 = comp3;
+    }
+
+    /**
+     * @return the comp4
+     */
+    public int getComp4() {
+        return comp4;
+    }
+
+    /**
+     * @param comp4 the comp4 to set
+     */
+    public void setComp4(int comp4) {
+        this.comp4 = comp4;
+    }
+
+    /**
+     * @return the comp5
+     */
+    public int getComp5() {
+        return comp5;
+    }
+
+    /**
+     * @param comp5 the comp5 to set
+     */
+    public void setComp5(int comp5) {
+        this.comp5 = comp5;
     }
 }

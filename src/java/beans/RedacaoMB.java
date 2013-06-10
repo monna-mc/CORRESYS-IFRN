@@ -1,5 +1,7 @@
 package beans;
 
+import auxiliar.FacesUtil;
+import dao.AlunoJpaController;
 import dao.RedacaoJpaController;
 import dao.exceptions.NonexistentEntityException;
 import java.awt.Graphics2D;
@@ -19,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import modelo.Aluno;
 import modelo.Redacao;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.DefaultStreamedContent;
@@ -35,14 +38,18 @@ public class RedacaoMB implements Serializable {
 
     static EntityManagerFactory emf = Persistence.createEntityManagerFactory("CORRESYS_1.0PU");
     RedacaoJpaController dao = new RedacaoJpaController(emf);
-    private String mensagem = "";
+    private String mensagem = "" , corregirMsg;
     private List<Redacao> redacoes = new ArrayList<Redacao>();
     private Redacao redacao = new Redacao();
     private String redacaoPesquisado;
     private UploadedFile foto;
     private DefaultStreamedContent graphicText;
+    AlunoJpaController d = new AlunoJpaController(emf);
+    private Aluno alunoR = new Aluno();
+    private String matriculaA = "";
 
     public RedacaoMB() {
+        pesquisar();
     }
 
     public String getMensagem() {
@@ -105,23 +112,17 @@ public class RedacaoMB implements Serializable {
 
             redacao.setImagem(imgNova);
 
-            /* dao.create(redacao);
-             this.setMensagem(this.redacao.getTitulo() + " cadastrado(a) com sucesso! ");
-             redacao = dao.findRedacao(redacao.getId());*/
-
             try {
                 dao.create(redacao);
                 this.setMensagem(this.redacao.getTitulo() + " cadastrado(a) com sucesso ! ");
                 redacao = new Redacao();
             } catch (Exception ex) {
-                setMensagem(this.redacao.getTitulo() + "já existe no sistema, cadastro não realizado!");
+                setMensagem(this.redacao.getTitulo() + " já existe no sistema, ou matrícula do Aluno e Corretor são incorretas, cadastro não realizado!");
                 Logger.getLogger(AlunoMB.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-         pesquisar();
+        pesquisar();
     }
-
-    
 
     public void excluir() {
         try {
@@ -132,17 +133,27 @@ public class RedacaoMB implements Serializable {
             this.setMensagemExclusao("id não existe");
             Logger.getLogger(RedacaoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pesquisar();
     }
 
     public void alterar() throws Exception {
-        try {
-            dao.edit(redacao);
-            setMensagemAlteracao(this.redacao.getTitulo() + " foi alterado(a) com sucesso!");
-            redacao = new Redacao();
-        } catch (NonexistentEntityException ex) {
-            this.setMensagemAlteracao("id não existe");
-            Logger.getLogger(RedacaoMB.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (getFoto() != null) {
+
+            byte[] imgNova = foto.getContents();
+
+            redacao.setImagem(imgNova);
+
+            try {
+                dao.edit(redacao);
+                setMensagemAlteracao(this.redacao.getTitulo() + " foi alterado(a) com sucesso!");
+                redacao = new Redacao();
+            } catch (NonexistentEntityException ex) {
+                this.setMensagemAlteracao("id não existe");
+                Logger.getLogger(RedacaoMB.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+        pesquisar();
     }
 
     public int pesquisar() {
@@ -192,4 +203,62 @@ public class RedacaoMB implements Serializable {
         //retorna a imagem gravada no BD
         return new DefaultStreamedContent(new ByteArrayInputStream(redacao.getImagem()));
     }
+
+    public void carregar(Long id) {
+        Redacao r = dao.findRedacao(id);
+        redacao.setTema(r.getTema());
+        redacao.setTitulo(r.getTitulo());
+        redacao.setMatriculaAluno(r.getMatriculaAluno());
+        redacao.setMatriculaCorretor(r.getMatriculaCorretor());
+        redacao.setStatus(r.getStatus());
+        redacao.setNota(r.getNota());
+        redacao.setId(r.getId());
+
+        if (redacao == null) {
+            redacao = new Redacao();
+        }
+    }
+
+    
+     /**
+     * @return the corregirMsg
+     */
+    public String getCorregirMsg() {
+        return corregirMsg;
+    }
+
+    /**
+     * @param corregirMsg the corregirMsg to set
+     */
+    public void setCorregirMsg(String corregirMsg) {
+        this.corregirMsg = corregirMsg;
+    }
+    
+    public void corrigir() throws Exception {
+
+            try {
+                redacao.setNota((redacao.getComp1()+ redacao.getComp2() + redacao.getComp3() + redacao.getComp4() + redacao.getComp5())/100);
+                dao.edit(redacao);
+                setCorregirMsg(this.redacao.getTitulo() + " foi corrigido(a) com sucesso!");
+                redacao = new Redacao();
+            } catch (NonexistentEntityException ex) {
+                this.setCorregirMsg("não foi possível salvar a correção");
+                Logger.getLogger(RedacaoMB.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        pesquisar();
+    }
+    
+    /* public List<redacao> VerificarRed(){
+     Redacao r = dao.findRedacaoAluno(matriculaA);
+     if (r != null){
+     redacao = r;
+     RedacaoMB umb = FacesUtil.getRedacaoMB();
+     umb.setRedacao(redacao);
+          
+     return redacao;
+     } else {
+     return false;
+     }
+     }*/
+
 }

@@ -2,11 +2,13 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -30,7 +32,7 @@ public class Aluno implements Serializable {
     private String curso;
     private String turma;
     
-            
+    
     public Long getId() {
         return id;
     }
@@ -147,5 +149,4 @@ public class Aluno implements Serializable {
     public String toString() {
         return "modelo.Aluno[ id=" + id + " ]";
     }
- 
 }

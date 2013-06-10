@@ -5,13 +5,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-
-        <f:facet name="first">
-            <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+    <h:head>   
             <title>Alterar_redacao</title>
-        </f:facet>
-
     </h:head>
 
     <h:body>
@@ -67,9 +62,9 @@
 
             <center>
                 <br/>
-                <h:outputText style="color:red" value="#{redacaoMB.mensagem}"/>
+                
             </center>
-            <h:form id="form1" enctype="multipart/form-data">
+            <h:form id="formAltRed" enctype="multipart/form-data">
 
                 <h:inputHidden  value="#{redacaoMB.redacao.id}"/>
                 <br/>
@@ -93,7 +88,7 @@
 
                         <f:selectItem itemLabel="Corrigida" itemValue="Corrigida" />  
                         <f:selectItem itemLabel="Recorrigida" itemValue="Recorrigida"/>
-                        <f:selectItem itemLabel="Nao Corrigida" itemValue=" Nao Corrigida"/>
+                        <f:selectItem itemLabel="Não Corrigida" itemValue=" Nao Corrigida"/>
 
                     </p:selectOneMenu>
                     <br/>
@@ -105,12 +100,14 @@
                     <br/>
                     <br/>
                     <hr/>
-                    <h:commandButton value="Inserir" action="#{redacaoMB.upload()}" /><h:message for="nome" style="color:red"/>
+                    <h:commandButton value="Atualizar" action="#{redacaoMB.alterar()}" /><h:message for="nome" style="color:red"/>
                     <p:spacer height="22"/>
                     <h:commandButton value="Cancelar" action="administrador.xhtml"/>
                     <br/>
                     <br/>
-                    <h:messages style="color:red"/>
+                    <p:graphicImage value="#{redacaoMB.fotoStreamed}"/>
+                    <br/>
+                    <h:messages for="formAltRed" style="color:red"/>
                 </p:panel>
 
             </h:form>
@@ -119,75 +116,81 @@
 
         <br/>
         <p:fieldset legend="LISTA DE REDAÇÕES" style="color: cornflowerblue">
-            <h:form id="tabela">
+            <p:dataTable id="tabelaRed" value="#{redacaoMB.redList}" var="con" rendered="#{redacaoMB.pesquisar() > 0}" paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
 
-                <p:dataTable rendered="true" id="redacao" var="r" value="#{redacaoMB.redList}" paginator="true" rows="10"  
-                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
-                    <f:facet name="header">  
+                <p:column  >
+                    <f:facet name="header">
+                        <h:outputText value="Tema" style="color: white"/>
+                    </f:facet>             
+                    <h:form >
+                        <h:commandLink value="${con.tema}">   
+                            <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                        </h:commandLink>  
+                    </h:form>
+                </p:column>
 
+                <p:column  >
+                    <f:facet name="header">
+                        <h:outputText value="Título" style="color: white"/>
+                    </f:facet>             
+                    <h:form >
+                        <h:commandLink value="${con.titulo}">   
+                            <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                        </h:commandLink>  
+                    </h:form>
+                </p:column>
+
+
+                <p:column  >
+                    <f:facet name="header">
+                        <h:outputText value="Matrícula Aluno" style="color: white"/>
+                    </f:facet>             
+                    <h:form >
+                        <h:commandLink value="${con.matriculaAluno}">   
+                            <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                        </h:commandLink>  
+                    </h:form>
+                </p:column>
+
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Matricula Corretor" style="color: white"/>                   
                     </f:facet>
+                    <h:form >
+                        <h:commandLink action="#{redacaoMB.carregar(con.id)}">
+                            <h:outputText value="${con.matriculaCorretor}"/>
+                        </h:commandLink>                        
+                    </h:form>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Tema" />
-                        </f:facet>
-                        <p:commandLink value="#{r.tema}" update=":form1">
-                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
-                        </p:commandLink>
-                    </p:column>
+                </p:column>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Título" />
-                        </f:facet>
-                        <p:commandLink value="#{r.titulo}" update=":form1">
-                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
-                        </p:commandLink>
-                    </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nota" style="color: white"/>                   
+                    </f:facet>
+                    <h:form>
+                        <h:commandLink action="#{redacaoMB.carregar(con.id)}">
+                            <h:outputText  value="${con.nota}"/>
+                        </h:commandLink>                        
+                    </h:form>
+                </p:column>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Matrícula do Aluno" />
-                        </f:facet>
-                        <p:commandLink value="#{r.matriculaAluno}" update=":form1">
-                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
-                        </p:commandLink>
-                    </p:column>
+                <p:column>
+                    <f:facet name="header">
+                        <h:outputText value="Status" style="color: white"/>                   
+                    </f:facet>
+                    <h:form>
+                        <h:commandLink action="#{redacaoMB.carregar(con.id)}">
+                            <h:outputText  value="${con.status}"/>
+                        </h:commandLink>                        
+                    </h:form>
+                </p:column>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Matrícula do Corretor" />
-                        </f:facet>
-                        <p:commandLink value="#{r.matriculaCorretor}" update=":form1">
-                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
-                        </p:commandLink>
-                    </p:column>
-                    
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Status" />
-                        </f:facet>
-                        <p:commandLink value="#{r.status}" update=":form1">
-                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
-                        </p:commandLink>
-                    </p:column>
-                    
-                     <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Data" />
-                        </f:facet>
-                        <p:commandLink value="#{r.dat}" update=":form1">
-                            <f:setPropertyActionListener value="#{r}" target="#{redacaoMB.redacao}"/>  
-                        </p:commandLink>
-                    </p:column>
-                    
-                </p:dataTable>
-
-            </h:form>
+            </p:dataTable>  
 
         </p:fieldset>
-        
-        
+
     </h:body>
 
 </html>

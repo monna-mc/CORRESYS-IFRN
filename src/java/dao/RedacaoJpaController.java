@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import modelo.Redacao;
@@ -133,5 +135,17 @@ public class RedacaoJpaController implements Serializable {
             em.close();
         }
     }
+    
+     public Redacao findRedacaoAluno(String matriculaAluno){
+        EntityManager em = getEntityManager();
+        TypedQuery<Redacao> query;
+        query = em.createQuery("select r from Redacao r , Aluno a where r.matriculaAluno =:a.matricula", Redacao.class);
+        query.setParameter("matricula", matriculaAluno);
+        try{
+            return query.getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
+    } 
     
 }

@@ -1,17 +1,75 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Usuario_Aluno</title>
-    </h:head>
-    <h:body>
-        <h1>Bem vindo aluno(a) </h1>
-        
-        <h:outputText value="#{loginAlunoMB.aluno.nome}"/>
-        
-        <a href="./homeCorresys.xhtml">sair</a>
-    </h:body>
+
+
+    <f:view contentType="text/html">
+        <h:head>
+
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Usuario_Aluno</title>
+            </f:facet>
+
+        </h:head>
+
+        <h:body>
+
+            <h:form>  
+
+                <p:growl id="messages"/>  
+
+                <center for="nome" style="color:cornflowerblue"> 
+                    <h1> 
+                        CORRESYS 
+                    </h1>   
+                </center>
+                <h5>
+                    <blockquote>
+
+                        Bem vindo(a)  <h:outputText value="#{loginAlunoMB.aluno.nome}" />
+
+                    </blockquote>  
+                </h5>
+
+                <p:menubar> 
+
+                    <p:menuitem value="Início" url="aluno.xhtml" icon="ui-icon-home" />  
+
+                    <p:submenu label="Lista de Redação">  
+                        <p:menuitem value="Redações" url="listaRedacoesAluno.xhtml" />
+                    </p:submenu> 
+                    
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginAlunoMB.deslogarA()}"/> 
+
+                </p:menubar>  
+
+            </h:form> 
+
+            <h:form>
+                <br/>
+
+                <p:fieldset legend="INFORMAÇÕES">
+
+                    <br/>
+                    Nome: <h:outputText value="${loginAlunoMB.aluno.nome}"/>
+                    <br/>
+                    Matrícula: <h:outputText value="${loginAlunoMB.aluno.matricula}"/>
+                    <br/>
+
+                </p:fieldset>
+
+            </h:form>
+
+            <br/>
+
+        </h:body>
+
+    </f:view>
 </html>
+
+
 

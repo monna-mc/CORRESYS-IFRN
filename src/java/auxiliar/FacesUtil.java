@@ -11,6 +11,7 @@ import beans.CorretorMB;
 import beans.LoginAdmMB;
 import beans.LoginAlunoMB;
 import beans.LoginCorretorMB;
+import beans.RedacaoMB;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -76,6 +77,14 @@ public class FacesUtil {
         LoginCorretorMB loginCorretorMB = (LoginCorretorMB) app.evaluateExpressionGet(facesContext, "#{loginCorretorMB}", LoginCorretorMB.class);
         return loginCorretorMB;
     }
+    
+    public static RedacaoMB getRedacaoMB(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        Application app = facesContext.getApplication();
+        RedacaoMB redacaoMB = (RedacaoMB) app.evaluateExpressionGet(facesContext, "#{redacaoMB}",RedacaoMB.class);
+        return redacaoMB;
+    }
+    
     
     /**
      * @param id o identificador da tag que receberá a mensagem. Por exemplo: "formCadastro:nome"

@@ -70,7 +70,7 @@
                 <h:outputText style="color:red" value="#{redacaoMB.mensagem}"/>
             </center>
             <p:growl/>
-            <h:form id="form1" enctype="multipart/form-data">
+            <h:form id="formRed" enctype="multipart/form-data">
 
                 <h:inputHidden  value="#{redacaoMB.redacao.id}"/>
                 <br/>
@@ -94,7 +94,7 @@
 
                         <f:selectItem itemLabel="Corrigida" itemValue="Corrigida" />  
                         <f:selectItem itemLabel="Recorrigida" itemValue="Recorrigida"/>
-                        <f:selectItem itemLabel="Nao Corrigida" itemValue=" Nao Corrigida"/>
+                        <f:selectItem itemLabel="Não Corrigida" itemValue=" Nao Corrigida"/>
 
                     </p:selectOneMenu>
                     <br/>
@@ -111,7 +111,7 @@
                     <h:commandButton value="Cancelar" action="administrador.xhtml"/>
                     <br/>
                     <br/>
-                    <h:messages style="color:red"/>
+                    <h:messages for="formRed" style="color:red"/>
                 </p:panel>
 
             </h:form>

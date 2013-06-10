@@ -120,8 +120,8 @@ public class LoginAdmMB {
     public String deslogar(){
         setDeslogado();
         administrador = new Administrador();
-        matricula = "";        
-        senha = "";
+        matricula = null;        
+        senha = null;
         return "/homeCorresys.xhtml";
     }
     /**

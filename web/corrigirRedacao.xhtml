@@ -1,0 +1,237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <f:view contentType="text/html">
+        <h:head>
+
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Corrigir_Redacao</title>
+            </f:facet>
+
+        </h:head>
+
+        <h:body>
+
+            <h:form>  
+
+                <p:growl id="messages"/>  
+
+                <center for="nome" style="color:cornflowerblue"> 
+                    <h1> 
+                        CORRESYS 
+                    </h1>   
+                </center>
+                <h5>
+                    <blockquote>
+
+                        Bem vindo(a)  <h:outputText value="#{loginCorretorMB.corretor.nome}" />
+
+                    </blockquote>  
+                </h5>
+
+                <p:menubar> 
+
+                    <p:menuitem value="Início" url="corretor.xhtml" icon="ui-icon-home" />  
+
+                    <p:menuitem  value="Corrigir redações" url="corrigirRedacao.xhtml" />
+
+                    <p:menuitem value="Sair" icon="ui-icon-close" action="#{loginCorretorMB.deslogar()}"/> 
+
+                </p:menubar>  
+
+            </h:form> 
+
+            <br/>
+            <p:fieldset legend="LISTA DE REDAÇÕES" style="color: cornflowerblue">
+                <p:dataTable id="tabelaRed" value="#{redacaoMB.redList}" var="con" rendered="#{redacaoMB.pesquisar() > 0}" paginator="true" rows="10"  
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Tema" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${con.tema}">   
+                                <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Título" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${con.titulo}">   
+                                <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="Código da redação" style="color: white"/>
+                        </f:facet>             
+                        <h:form >
+                            <h:commandLink value="${con.id}">   
+                                <f:setPropertyActionListener value="#{con}" target="#{redacaoMB.redacao}"/>
+                            </h:commandLink>  
+                        </h:form>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Matricula Corretor" style="color: white"/>                   
+                        </f:facet>
+                        <h:form >
+                            <h:commandLink action="#{redacaoMB.carregar(con.id)}">
+                                <h:outputText value="${con.matriculaCorretor}"/>
+                            </h:commandLink>                        
+                        </h:form>
+
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status" style="color: white"/>                   
+                        </f:facet>
+                        <h:form>
+                            <h:commandLink action="#{redacaoMB.carregar(con.id)}">
+                                <h:outputText  value="${con.status}"/>
+                            </h:commandLink>                        
+                        </h:form>
+                    </p:column>
+
+                </p:dataTable>  
+
+            </p:fieldset>
+
+            <h:form>
+                <br/>
+                <p:layoutUnit position="center" size="100" resizable="true" closable="true" collapsible="true">
+
+                    <h:form id="CorRedacao" enctype="multipart/form-data">
+
+                        <h:inputHidden  value="#{redacaoMB.redacao.id}"/>
+
+                        <p:panel header="REDAÇÃO">
+                            <br/>
+                            <center>
+                                <p:graphicImage value="#{redacaoMB.fotoStreamed}" width="700" height="800"/>
+                            </center>  
+
+                        </p:panel>
+                        <br/>
+                        <center>
+                            <br/>
+                            <h:outputText style="color:red" value="#{redacaoMB.corregirMsg}"/>
+                        </center>
+                        <p:panel header="CORREÇÃO">
+                            <br/>
+                            <h:outputText value="Competência 1 : " title="Demonstrar domínio da norma padrão"/>
+                            <p:selectOneMenu value="#{redacaoMB.redacao.comp1}" required="true" requiredMessage="Status obrigatório">    
+
+                                <f:selectItem  itemLabel="Excelente" itemValue="200" itemDescription="Não apresenta, ou apresenta pouquíssimos desvios (200 pontos)"/>  
+                                <f:selectItem  itemLabel="Bom" itemValue="160" itemDescription="Apresenta desvios leves (160 pontos)"/>
+                                <f:selectItem  itemLabel="Adequado" itemValue="120" itemDescription="Presença de desvios graves em várias partes do texto (120 pontos)"/>
+                                <f:selectItem  itemLabel="Mediano" itemValue="80" itemDescription="Apresenta grande quantidade de desvios, graves ou gravíssimos (80 pontos)"/>
+                                <f:selectItem  itemLabel="Insuficiente" itemValue="40" itemDescription="Apresenta grande quantidade de desvios, graves ou gravíssimos e marcas de oralidade (40 pontos)"/>
+                                <f:selectItem  itemLabel="Desconhecimento total da norma" itemValue="0" itemDescription="(0 pontos)"/>
+
+                            </p:selectOneMenu>
+                            <br/>
+                            <br/>
+                            <h:outputText value="Competência 2 : " title="Compreender a proposta de redação e aplicar conceitos das várias áreas do conhecimento, para desenvolver o tema dentro dos limites estruturais do texto dissertativo-argumentativo"/>
+                            <p:selectOneMenu value="#{redacaoMB.redacao.comp2}" required="true" requiredMessage="Status obrigatório">    
+
+                                <f:selectItem  itemLabel="Muito bem" itemValue="200" itemDescription="Explora os principais aspectos do texto, argumentação consistente, estrutura excelente (200 pontos)"/>  
+                                <f:selectItem  itemLabel="Bem" itemValue="160" itemDescription="Não explora os principais aspectos do texto, argumentação consistente, estrutura boa (160 pontos)"/>
+                                <f:selectItem  itemLabel="Adequado" itemValue="120" itemDescription="Abordagem superficial, argumentação previsível, não apresenta tese explicitamente (120 pontos)"/>
+                                <f:selectItem  itemLabel="Mediano" itemValue="80" itemDescription="Tendência ao tangenciamento, argumentação previsível, cópia dos textos motivadores, texto só dissertativo (80 pontos)"/>
+                                <f:selectItem  itemLabel="Insuficiente" itemValue="40" itemDescription="Tangenciamento, repetição de ideias, ausência de argumentação, texto narrativo (40 pontos)"/>
+                                <f:selectItem  itemLabel="Não contempla" itemValue="0" itemDescription="Fuga total ao tema, fazer uma poesia (0 pontos)"/>
+
+                            </p:selectOneMenu>
+
+                            <br/>
+                            <br/>
+                            <h:outputText value="Competência 3 : " title="Selecionar, relacionar, organizar e interpretar informações, fatos, opiniões e argumentos em defesa de um ponto de vista."/>
+                            <p:selectOneMenu value="#{redacaoMB.redacao.comp3}" required="true" requiredMessage="Status obrigatório">    
+
+                                <f:selectItem  itemLabel="Consistente e com autoria" itemValue="200" itemDescription="Explicita tese, articula os argumentos, planeja a relação coerente entre as ideias (200 pontos)"/>  
+                                <f:selectItem  itemLabel="Consistente" itemValue="160" itemDescription="Explicita tese, articula os argumentos, planeja a relação coerente entre as ideias, argumentos previsíveis (160 pontos)"/>
+                                <f:selectItem  itemLabel="Pouco consistente " itemValue="120" itemDescription="Ideias desconectadas entre si, argumentos pouco convincentes para defender a opinião (120 pontos)"/>
+                                <f:selectItem  itemLabel="Contraditórios" itemValue="80" itemDescription="Ideias desarticuladas, opostas ou que limitam-se às dos textos motivadores (80 pontos)"/>
+                                <f:selectItem  itemLabel="Não defende um ponto de vista " itemValue=" 40" itemDescription="Não apresenta opinião (40 pontos)"/>
+                                <f:selectItem  itemLabel="Incoerente" itemValue="0" itemDescription="Não apresenta um ponto de vista (0 pontos)"/>
+
+                            </p:selectOneMenu>
+
+                            <br/>
+                            <br/>
+                            <h:outputText value="Competência 4 : " title="Demonstrar conhecimento dos  mecanismos linguísticos necessários à construção da argumentação"/>
+                            <p:selectOneMenu value="#{redacaoMB.redacao.comp4}" required="true" requiredMessage="Status obrigatório">    
+
+                                <f:selectItem  itemLabel="Domínio pleno" itemValue="200" itemDescription="Não contém frases quebradas, sem inadequações (200 pontos)"/>  
+                                <f:selectItem  itemLabel="Domínio" itemValue="160" itemDescription="Poucas inadequações, não contém frases quebradas (160 pontos)"/>
+                                <f:selectItem  itemLabel="Domínio regular" itemValue="120" itemDescription="Algumas inadequações, eventuais frases quebradas (120 pontos)"/>
+                                <f:selectItem  itemLabel="Pouco domínio" itemValue="80" itemDescription="Muitas inadequações, frases muito quebradas (80 pontos)"/>
+                                <f:selectItem  itemLabel="Muito pouco domínio" itemValue="40" itemDescription="E frequentes desvios de coesão, não faz retomadas (40 pontos)"/>
+                                <f:selectItem  itemLabel="Não domina" itemValue="0" itemDescription="Informações desconexas (0 pontos)"/>
+
+                            </p:selectOneMenu>
+
+                            <br/>
+                            <br/>
+                            <h:outputText value="Competência 5 : " title="Elaborar proposta de intervenção para   o problema abordado, respeitando os direitos humanos"/>
+                            <p:selectOneMenu value="#{redacaoMB.redacao.comp5}" required="true" requiredMessage="Status obrigatório">    
+
+                                <f:selectItem  itemLabel="Clara e inovadora" itemValue="200" itemDescription="Relacionada à tese e bem articulada com a discussão desenvolvida. Meios explícitos para realizá-la (200 pontos)"/>  
+                                <f:selectItem  itemLabel="Clara" itemValue="160" itemDescription="Relacionada à tese e bem articulada com a discussão desenvolvida. Meios explícitos para realizá-la, não inovadora (160 pontos)"/>
+                                <f:selectItem  itemLabel="Pouco articulada " itemValue="120" itemDescription="Relacionada ao tema, mas pouco articulada à discussão desenvolvida no texto (120 pontos)"/>
+                                <f:selectItem  itemLabel="Precária" itemValue="80" itemDescription="Não articulada com a discussão desenvolvida no texto ou com desenvolvimento precário dos meios para realizá-la.(80 pontos)"/>
+                                <f:selectItem  itemLabel="Tangencial" itemValue="40" itemDescription="Tangencial ao tema ou subentendida no desenvolvimento da argumentação (40 pontos)"/>
+                                <f:selectItem  itemLabel="Sem proposta" itemValue="0" itemDescription="Não apresenta proposta de intervenção (0 pontos)"/>
+
+                            </p:selectOneMenu>
+
+                            <br/>
+                            <br/>
+                            Status da Redação: *
+                            <p:selectOneMenu value="#{redacaoMB.redacao.status}" required="true" requiredMessage="Status obrigatório">    
+
+                                <f:selectItem itemLabel="Corrigida" itemValue="Corrigida" />  
+                                <f:selectItem itemLabel="Recorrigida" itemValue="Recorrigida"/>
+                                <f:selectItem itemLabel="Não Corrigida" itemValue=" Nao Corrigida"/>
+
+                            </p:selectOneMenu>
+                            <br/>
+                            <br/>
+                            <h:commandButton value="Salvar Correção" action="#{redacaoMB.corrigir()}" /><h:message for="nome" style="color:red"/>
+                            <p:spacer height="22"/>
+                            <h:commandButton value="Cancelar" action="corretor.xhtml"/>
+                            <br/>
+                            <br/>
+                            <h:messages style="color:red"/>
+                        </p:panel>
+                        
+                    </h:form>
+
+                </p:layoutUnit>
+
+            </h:form>
+
+            <br/>
+
+        </h:body>
+
+    </f:view>
+</html>
+
